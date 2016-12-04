@@ -1,11 +1,13 @@
-(function() {
-  'use strict';
+// (function() {
+//   'use strict';
 
+  // MATERIALIZE CAROUSEL
   $(document).ready(function(){
       $('.carousel').carousel();
     });
 
   $('.carousel.carousel-slider').carousel({full_width: true});
+
 
 
   // const $xhr = $.ajax({
@@ -84,4 +86,4 @@
 
 
 
-})();
+// })();

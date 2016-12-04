@@ -7,3 +7,16 @@ body {
  main {
    flex: 1 0 auto;
  }
+
+ #test {
+   height: 400px;
+   width: 400px;
+ }
+
+ /*.flexed {
+   display: flex;
+ }*/
+
+/*.flexChild {
+  margin-bottom: 50px;
+}*/
