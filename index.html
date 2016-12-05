@@ -34,10 +34,11 @@
               <div class="row center">
                 <form class="container">
                   <div class="input-field">
-                    <input id="search" type="search" required>
-                    <label for="search">
+                    <input id="userQuery" type="search" required>
+                    <label for="user">
                       <i class="material-icons yellow-text">search</i>
                     </label>
+
                   </div>
                 </form>
               </div>
@@ -49,13 +50,21 @@
         </header>
 
         <section>
-
           <ul class="collapsible no-margin" data-collapsible="accordion">
+            <!-- FOOD TAB -->
             <li>
-              <div class="collapsible-header blue lighten-3">
-                <i class="material-icons">local_pizza</i>
-                Food & Drink
+              <div class="collapsible-header blue lighten-3 row no-margin">
+                <div class="col s3 offset-s5">
+                  <i id="food-tab" class="material-icons">
+                    local_pizza
+                  </i>
+                  Food & Drink
+                </div>
+                <div class="col s1 offset-s3 toRight">
+                  <i class="material-icons right-align">keyboard_arrow_down</i>
+                </div>
               </div>
+
               <div class="collapsible-body">
                 <!---->
                 <div class="row">
@@ -135,33 +144,43 @@
                       </div>
                     </div>
                   </div> -->
-
                 </div>
-
-
               </div>
             </li>
+            <!-- ACTIVITES & ENTERTAINMETN TAB -->
             <li>
-              <div class="collapsible-header"><i class="material-icons">rowing</i>Activities</div>
-              <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+              <div class="collapsible-header row no-margin">
+                <div class="col s3 offset-s5">
+                  <i id="activities-tab" class="material-icons">rowing</i>
+                  Activities & Entertainment
+                </div>
+                <div class="col s1 offset-s3 toRight">
+                  <i class="material-icons right-align">keyboard_arrow_down</i>
+                </div>
+              </div>
+              <div class="collapsible-body">
+                <p>Lorem ipsum dolor sit amet.</p>
+              </div>
             </li>
+
+            <!-- SHOPPING & RETAIL TAB -->
             <li>
-              <div class="collapsible-header"><i class="material-icons">local_activity</i>Entertainment</div>
-              <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-            </li>
-            <li>
-              <div class="collapsible-header"><i class="material-icons">local_offer</i>Retail Goods</div>
+              <div class="collapsible-header row no-margin">
+                <div class="col s3 offset-s5">
+                  <i class="material-icons">local_offer</i>
+                  Shopping & Retail
+                </div>
+                <div class="col s1 offset-s3 toRight">
+                  <i class="material-icons right-align">keyboard_arrow_down</i>
+                </div>
+              </div>
               <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
             </li>
           </ul>
         </section>
-
-
-
-
       </main>
 
-      <footer class="page-footer yellow accent-1">
+      <footer class="page-footer yellow accent-1" style="margin: 0px">
          <div class="container">
            <div class="row">
              <div class="col l6 s12">
@@ -173,8 +192,8 @@
          </div>
          <div class="footer-copyright">
            <div class="container blue-grey-text">
-           © 2014 Copyright Text
-           <a class="blue-grey-text text-darken-1 right" href="#!">More Links</a>
+           © 2016 Miser
+           <a class="blue-grey-text text-darken-1 right" href="#!">Contact Us</a>
            </div>
          </div>
        </footer>

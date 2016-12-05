@@ -8,26 +8,21 @@ body {
    flex: 1 0 auto;
  }
 
-/*.hero {
-  background-size: cover;
-  height: 400px;
-  margin: 0;
-}*/
-
 .parallax-container {
      height: 350px;
    }
 
 h3{
-  font-size: 28px;
+  font-size: 32px;
 }
 
 .logo {
   height: 70px;
 }
 
-#search {
+#userQuery {
   background-color: white;
+  box-shadow: 1px 1px 3px 1px #3c3a3b;
 }
 
 .full-height {
@@ -36,4 +31,14 @@ h3{
 
 .no-margin {
   margin: 0px;
+}
+
+.toRight {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.flexed {
+  display: flex;
+  justify-content: space-around;
 }
