@@ -8,15 +8,16 @@ body {
    flex: 1 0 auto;
  }
 
- #test {
-   height: 400px;
-   width: 400px;
- }
+.hero {
+  background: url(../assets/storefront.jpg) -70px;
+  background-size: canoes;
+  height: 350px;
+}
 
- /*.flexed {
-   display: flex;
- }*/
+.heroP {
+  font-size: 28px;
+}
 
-/*.flexChild {
-  margin-bottom: 50px;
-}*/
+#search {
+  background-color: white;
+}
