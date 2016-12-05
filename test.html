@@ -10,32 +10,36 @@
 
     <script defer src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script defer src="js/materialize.min.js"></script>
-    <script defer src="js/index.js"></script>
+    <!-- <script defer src="js/index.js"></script> -->
     <title>Test</title>
   </head>
   <body>
 
-    <div class="collapsible-header blue lighten-3 row">
-      <div class="col s3 offset-s5">
-        <i id="food-tab" class="material-icons">
-          local_pizza
-        </i>
-        Food & Drink
-      </div>
-      <div class="col s1 offset-s3 toRight">
-        <i class="material-icons right-align">keyboard_arrow_down</i>
+    <div id="hotrow1" class="row no-margin">
+      <div class="col s2">
+        <div class="card dealcard">
+          <div class="card-image waves-effect waves-block waves-light dealimage">
+            <img class="activator" src="http://www.michellefung.net/photos/references/totoro.jpg" alt="totoro">
+          </div>
+          <div class="card-content dealcontent row">
+
+            <div class="col s10">
+              <span class="card-title activator grey-text text-darken-4 cardTitle">
+                14% OFF AT HOMEGROWN SUSTAINABLE SANDWICH SHOP
+              </span>
+            </div>
+            <div class="col s1">
+              <i class="material-icons right">more_vert</i>
+            </div>
+            <p class="col 12"><a href="#" class="cardText">This is a really long link for testing</a></p>
+          </div>
+          <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4 cardTitle">14% OFF AT HOMEGROWN SUSTAINABLE SANDWICH SHOP<i class="material-icons right">close</i></span>
+            <p class="cardText">Here is some more information about this product that is only revealed once clicked on.</p>
+          </div>
+        </div>
       </div>
     </div>
-    <!-- ENTERTAINMENT TAB -->
-    <li>
-      <div class="collapsible-header">
-        <i id="entertainment-tab" class="material-icons">local_activity</i>
-        Entertainment
-      </div>
-      <div class="collapsible-body">
-        <p>Lorem ipsum dolor sit amet.</p>
-      </div>
-    </li>
 
   </body>
 </html>

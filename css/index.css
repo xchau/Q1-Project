@@ -25,6 +25,44 @@ h3{
   box-shadow: 1px 1px 3px 1px #3c3a3b;
 }
 
+/* HOT DEALS SECTION */
+#hotdeals {
+  background-color: white;
+  margin: 0px;
+  min-height: 200px;
+  padding: 10px;
+  width: 100%;
+}
+
+.dealcard {
+  height: 300px;
+}
+
+.dealimage {
+  height: 55%;
+}
+
+.dealcontent {
+  height: 45%;
+}
+
+.cardTitle {
+  font-size: 12px !important;
+  line-height: normal !important;
+  font-weight: 700 !important;
+}
+
+.cardText {
+  font-size: 12px !important;
+  line-height: 1.25;
+  color: lightcoral;
+}
+
+.lowPad {
+  padding: 10px 15px !important;
+}
+
+
 .full-height {
   height: 100%;
 }
