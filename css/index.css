@@ -9,14 +9,18 @@ body {
  }
 
 .hero {
-  background: url(../assets/storefront.jpg) -60px;
+  background: url(../assets/coffeebw.jpg) -60px;
   background-size: canoes;
-  height: 330px;
+  height: 400px;
   margin: 0;
 }
 
 .heroP {
   font-size: 28px;
+}
+
+.logo {
+  height: 70px;
 }
 
 #search {
