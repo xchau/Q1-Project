@@ -1,12 +1,11 @@
 // (function() {
 //   'use strict';
 
-  // MATERIALIZE CAROUSEL
+  // MATERIALIZE PARALLAX
   $(document).ready(function(){
-      $('.carousel').carousel();
+      $('.parallax').parallax();
     });
 
-  $('.carousel.carousel-slider').carousel({full_width: true});
 
 
 
