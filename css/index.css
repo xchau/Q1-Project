@@ -9,9 +9,10 @@ body {
  }
 
 .hero {
-  background: url(../assets/storefront.jpg) -70px;
+  background: url(../assets/storefront.jpg) -60px;
   background-size: canoes;
-  height: 350px;
+  height: 330px;
+  margin: 0;
 }
 
 .heroP {
