@@ -79,11 +79,17 @@ h3 {
   box-shadow: 1px 1px 3px 1px #3c3a3b;
 }
 
+/* TABS */
+.tabs .tab a.active {
+  font-size: 16px;
+  font-weight: 600;
+}
+
 /* HOT DEALS SECTION */
 #hotdeals {
   background-color: white;
   margin: 0px;
-  min-height: 200px;
+  min-height: 20px;
   padding: 10px;
   width: 100%;
 }
@@ -127,7 +133,7 @@ h3 {
 }
 
 .descText {
-  font-size: 22px;
+  font-size: 20px;
   line-height: 2.5;
   padding: 20px 80px;
 }
