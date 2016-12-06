@@ -1,10 +1,8 @@
 (function() {
-  // 'use strict';
+  'use strict';
 
   // MATERIALIZE PARALLAX
   $(document).ready(() => {
-    'use strict';
-
     $('.parallax').parallax();
   });
 
@@ -59,7 +57,7 @@
     $cardRevealDiv.appendTo($cardDiv);
     $cardDiv.appendTo($colDiv);
     $('#hotrow').append($colDiv);
-  }
+  };
 
   // POPULATE CONTENT DIV WITH LOCAL DEALS
   const $xhr = $.ajax({
@@ -72,8 +70,9 @@
     if ($xhr.status !== 200) {
       return;
     }
+    // console.log(data.deals);
     for (const location of data.deals) {
-      console.log(location.deal);
+      // console.log(location.deal);
       createHotCard(location.deal);
     }
   });
@@ -81,5 +80,36 @@
   $xhr.fail((err) => {
     console.error(err);
   });
+
+  // SEARCH BAR REQUEST
+  const $search = $('#submitButton');
+
+  $search.on('click', (event) => {
+    event.preventDefault();
+
+    const $userQuery = $('#userQuery').val();
+    const $xhrSearch = $.ajax({
+      method: 'GET',
+      url: `https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events,retail-services&per_page=12&radius=10&location=47.598962,-122.333799&query=${$userQuery}`,
+      dataType: 'json'
+    });
+
+    $xhrSearch.done((data) => {
+      if ($xhrSearch.status !== 200) {
+        return;
+      }
+
+      $('#hotrow').empty();
+      console.log(data.deals);
+      for (const location of data.deals) {
+        createHotCard(location.deal);
+      }
+    });
+
+    $xhrSearch.fail((err) => {
+      console.error(err);
+    })
+  });
+
 
 })();
