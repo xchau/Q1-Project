@@ -23,8 +23,8 @@
     const $cardContentDiv = $('<div>').addClass('card-content dealcontent lowPad row');
     const $cardSpanOne = $('<span>').addClass('card-title activator grey-text text-darken-4 cardTitle');
     $cardSpanOne.text(deals.short_title.toUpperCase());
-    const $vertIcon = $('<i>').addClass('material-icons right');
-    const $spacerOne = $('<div>').addClass('col s10');
+    const $vertIcon = $('<i>').addClass('material-icons activator hoverFinger right');
+    const $spacerOne = $('<div>').addClass('col s10 tbMargin');
     const $spacerTwo = $('<div>').addClass('col s1 offset-s1');
 
     $vertIcon.text('more_vert');
@@ -37,7 +37,7 @@
     const $cardLink = $('<a>').prop('href', deals.untracked_url);
 
     $cardLink.addClass('cardText');
-    $cardLink.text(`Visit ${deals.merchant.name}`);
+    $cardLink.text(`Offered by ${deals.provider_name}`);
     $cardLink.appendTo($pOne);
     $pOne.appendTo($cardContentDiv);
 
@@ -61,20 +61,26 @@
     $('#hotrow1').append($colDiv);
   }
 
-  // $('#submitButton').on('click', () => {
-  const $xhr = $.ajax({
-    method: 'GET',
-    url: 'https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events&per_page=8&radius=10&location=47.598962,-122.333799',
-    dataType: 'json'
-  });
-
-  $xhr.done((data) => {
-    console.log(data.deals.length);
-    for (const location of data.deals) {
-      console.log(location.deal);
-      createHotCard(location.deal);
-    }
-  });
+  // POPULATE CONTENT DIV WITH LOCAL DEALS
+  // const $xhr = $.ajax({
+  //   method: 'GET',
+  //   url: 'https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events,retail-services&per_page=8&radius=10&location=47.598962,-122.333799',
+  //   dataType: 'json'
+  // });
+  //
+  // $xhr.done((data) => {
+  //   if ($xhr.status !== 200) {
+  //     return;
+  //   }
+  //   for (const location of data.deals) {
+  //     console.log(location.deal);
+  //     createHotCard(location.deal);
+  //   }
+  // });
+  //
+  // $xhr.fail((err) => {
+  //   console.error(err);
+  // });
 
   // });
 

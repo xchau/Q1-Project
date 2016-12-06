@@ -9,15 +9,60 @@ body {
  }
 
 .parallax-container {
-     height: 350px;
-   }
+  height: 350px;
+}
 
-h3{
-  font-size: 32px;
+.tbMargin {
+  margin: 5px 0px;
+}
+
+.lowPad {
+  padding: 10px 15px !important;
+}
+
+.no-margin {
+  margin: 0px;
+}
+
+.toRight {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.flexed {
+  display: flex;
+  justify-content: space-around;
+}
+
+h4 {
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .logo {
   height: 70px;
+}
+
+/* HERO SECTION */
+.heroHeader {
+  height: 400px;
+}
+
+h3 {
+  font-size: 32px;
+}
+
+.heroText {
+  font-size: 25px;
+}
+
+.heroSection {
+  background-color: rgba(180, 180, 180, .4);
+  width: 100%;
+}
+
+.fullHeight {
+  height: 100%;
 }
 
 #userQuery {
@@ -29,7 +74,7 @@ h3{
 #hotdeals {
   background-color: white;
   margin: 0px;
-  min-height: 200px;
+  min-height: 20px;
   padding: 10px;
   width: 100%;
 }
@@ -46,37 +91,20 @@ h3{
   height: 45%;
 }
 
+/* CARD STYLES */
+
 .cardTitle {
-  font-size: 12px !important;
+  font-size: 18px !important;
   line-height: normal !important;
   font-weight: 700 !important;
 }
 
 .cardText {
-  font-size: 12px !important;
+  font-size: 14px !important;
   line-height: 1.25;
   color: lightcoral;
 }
 
-.lowPad {
-  padding: 10px 15px !important;
-}
-
-
-.full-height {
-  height: 100%;
-}
-
-.no-margin {
-  margin: 0px;
-}
-
-.toRight {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.flexed {
-  display: flex;
-  justify-content: space-around;
+.hoverFinger {
+  cursor: pointer;
 }
