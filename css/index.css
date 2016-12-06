@@ -45,19 +45,27 @@ h4 {
 
 /* HERO SECTION */
 .heroHeader {
-  height: 400px;
+  height: 350px;
 }
 
 h3 {
   font-size: 32px;
 }
 
+.lrPadded {
+  padding: 0px 10vw;
+}
+
 .heroText {
-  font-size: 25px;
+  font-size: 22px;
 }
 
 .heroSection {
+  align-items: center;
   background-color: rgba(180, 180, 180, .4);
+  display: flex;
+  height: 80px;
+  justify-content: center;
   width: 100%;
 }
 
@@ -74,7 +82,7 @@ h3 {
 #hotdeals {
   background-color: white;
   margin: 0px;
-  min-height: 20px;
+  min-height: 200px;
   padding: 10px;
   width: 100%;
 }
@@ -92,19 +100,33 @@ h3 {
 }
 
 /* CARD STYLES */
-
 .cardTitle {
   font-size: 18px !important;
-  line-height: normal !important;
   font-weight: 700 !important;
+  line-height: normal !important;
 }
 
 .cardText {
+  color: lightcoral;
   font-size: 14px !important;
   line-height: 1.25;
-  color: lightcoral;
 }
 
 .hoverFinger {
   cursor: pointer;
+}
+
+/* DESCRIPTION SECTIONS */
+.serviceDescription {
+  margin-bottom: 0px;
+}
+
+.descCol {
+  height: 250px;
+}
+
+.descText {
+  font-size: 22px;
+  line-height: 2.5;
+  padding: 20px 80px;
 }
