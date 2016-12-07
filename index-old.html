@@ -34,8 +34,9 @@
             <section class="heroSection z-depth-1">
               <h3 class="yellow-text text-lighten-2 center container lrPadded">
               Live a full life without spending full price
-              </h3>
+            </h3>
             </section>
+
             <div class="container fullHeight">
               <div class="row center">
                 <form class="container">
@@ -51,17 +52,52 @@
                 </form>
               </div>
             </div>
+
+
           </div>
           <div class="col s8 offset-s2 center parallax">
             <img src="assets/coffee-shop.jpg" alt="coffee-shop">
           </div>
         </header>
 
-        <section id="mapContainer">
-          <div id="map">
-            <!--Map goes here-->
+
+        <div class="row">
+          <div class="col s12">
+            <ul class="tabs">
+              <li id="tab1" class="tab col s2 offset-s4 active">
+                <a href="#tabContent1">Miserly Deals</a>
+              </li>
+              <li id="tab2" class="tab col s2">
+                <a href="#tabContent2">Map</a>
+              </li>
+            </ul>
           </div>
-        </section>
+          <div id="tabContent1" class="col s12">
+            <section id="hotdeals">
+              <div id="hotrow" class="row no-margin">
+                <!--Deal cards go here-->
+              </div>
+            </section>
+          </div>
+          <div id="tabContent2" class="col s12">
+            <!-- <div class="mapSpace"> -->
+              <div id="map">
+                <!--Map goes here-->
+              </div>
+            <!-- </div> -->
+          </div>
+        </div>
+
+
+
+
+
+        <!-- <p>
+          <button onclick="geoFindMe()">
+            Show my location
+          </button>
+        </p>
+        <div id="out"></div> -->
 
         <section id="firstDesc" class="serviceDescription row">
           <div class="col s6 descCol yellow lighten-5 z-depth-1" style="display: flex; justify-content: center; align-items: center;">

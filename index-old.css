@@ -85,18 +85,12 @@ h3 {
   font-weight: 600;
 }*/
 
-/* MAP SECTION */
-#mapContainer {
+/* HOT DEALS SECTION */
+#hotdeals {
   background-color: white;
   margin: 0px;
   min-height: 20px;
-  padding: 30px 100px;
-  width: 100%;
-}
-
-#map {
-  background-color: grey;
-  min-height: 44vw;
+  padding: 10px;
   width: 100%;
 }
 
@@ -144,27 +138,15 @@ h3 {
   padding: 20px 80px;
 }
 
-/* INFO CARD STYLES */
-.infoTitle {
-  font-size: 18px;
-  font-weight: 600;
-  text-decoration: underline;
+/* GOOGLE MAP STYLES */
+#map {
+  background-color: grey;
+  height: 400px;
+  /*overflow: visible;*/
+  width: 100%;
 }
 
-.infoLink {
-  color: lightcoral;
-  font-style: italic;
-}
-
-.infoDescription a {
-  font-style: italic;
-}
-
-.infoContainer span {
-  margin: 0px 8px;
-}
-
-.infoIcon {
-  font-size: 17px;
-  margin-left: 0px 4px;
+.mapSpace {
+  background-color: white;
+  padding: 30px;
 }
