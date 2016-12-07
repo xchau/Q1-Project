@@ -61,6 +61,12 @@
   };
 
   // GENERATE GOOGLE map
+  const mapLabels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  let labelIndex = 0;
+
+  const locationNames = [];
+  let namesIndex = 0;
+
   const initMap = function(arrayOfCoordinates) {
     const current = {
       lat: 47.598962,
@@ -76,10 +82,29 @@
     for (const coord of arrayOfCoordinates) {
       const marker = new google.maps.Marker({
         position: coord,
+        label: mapLabels[labelIndex++ % mapLabels.length],
+        title: locationNames[namesIndex++ % locationNames.length],
         map: map
       });
     }
   };
+
+  // CREATE INFO WINDOW FOR MAP MARKERS
+  function createInfoWindow(arrayOfLocations) {
+    for (const location of arrayOfLocations) {
+      const $containerDiv = $('<div>').addClass('infoContainer');
+      const $titleDiv = $('<div>').addClass('infoTitleDiv');
+      const $h5 = $('<h5>').addClass('infoTitle');
+
+      $h5.appendTo($titleDiv).appendTo($cocontainerDiv);
+
+      const $contentDiv = $('<div>').addClass('infoContentDiv');
+      const $pInfo = $('<p>').addClass('pInfo');
+
+      $pInfo.text(`${location.deal.title} @ ${location.deal.merchant.name}`);
+      $pInfo.appendTo($contentDiv).appendTo($containerDiv);
+    }
+  }
 
   // POPULATE CONTENT DIV WITH LOCAL DEALS
   const $xhr = $.ajax({
@@ -94,20 +119,22 @@
     }
 
     const locationCoordinates = [];
+
     for (const location of data.deals) {
-      // console.log(location.deal);
       createHotCard(location.deal);
 
       const coord = {
         'lat': location.deal.merchant.latitude,
-        'lng': location.deal.merchant.longitude
+        'lng': location.deal.merchant.longitude,
       }
       locationCoordinates.push(coord);
-      // console.log(locationCoordinates);
+      locationNames.push(location.deal.merchant.name);
     }
+
     // CLICK EVENT ON TAB2
     $('#tab2').on('click', () => {
       initMap(locationCoordinates);
+      createInfoWindow(data.deals);
     })
   });
 
