@@ -10,6 +10,8 @@
 
       <script defer src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       <script defer src="js/materialize.min.js"></script>
+      <script async defer  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDe3s-A5dg6QWWI16Sd11C3_JtuoYavrys">
+      </script>
       <script defer src="js/index.js"></script>
       <title>Q1 Project</title>
     </head>
@@ -62,25 +64,27 @@
         <div class="row">
           <div class="col s12">
             <ul class="tabs">
-              <li class="tab col s2 offset-s4 active">
-                <a href="#test1">Miserly Deals</a>
+              <li id="tab1" class="tab col s2 offset-s4 active">
+                <a href="#tabContent1">Miserly Deals</a>
               </li>
-              <li class="tab col s2">
-                <a href="#test2">Map</a>
+              <li id="tab2" class="tab col s2">
+                <a href="#tabContent2">Map</a>
               </li>
             </ul>
           </div>
-          <div id="test1" class="col s12">
+          <div id="tabContent1" class="col s12">
             <section id="hotdeals">
               <div id="hotrow" class="row no-margin">
-
                 <!--Deal cards go here-->
-
               </div>
             </section>
           </div>
-          <div id="test2" class="col s12">
-            Google Maps API goes here
+          <div id="tabContent2" class="col s12">
+            <!-- <div class="mapSpace"> -->
+              <div id="map">
+                <!--Map goes here-->
+              </div>
+            <!-- </div> -->
           </div>
         </div>
 

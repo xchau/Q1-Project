@@ -15,6 +15,7 @@
     const $cardImgDiv = $('<div>').addClass('card-image waves-effect waves-block waves-light dealimage');
     const $cardImg = $('<img>').addClass('activator').prop('src', deals.image_url);
 
+    $cardImg.prop('onerror', 'this.src ="assets/404.jpg"');
     $cardImg.appendTo($cardImgDiv);
 
     // card content
@@ -59,6 +60,27 @@
     $('#hotrow').append($colDiv);
   };
 
+  // GENERATE GOOGLE map
+  const initMap = function(arrayOfCoordinates) {
+    const current = {
+      lat: 47.598962,
+      lng: -122.333799
+    };
+
+    const map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 12,
+      center: current
+    });
+
+    // create markers of each location
+    for (const coord of arrayOfCoordinates) {
+      const marker = new google.maps.Marker({
+        position: coord,
+        map: map
+      });
+    }
+  };
+
   // POPULATE CONTENT DIV WITH LOCAL DEALS
   const $xhr = $.ajax({
     method: 'GET',
@@ -70,11 +92,23 @@
     if ($xhr.status !== 200) {
       return;
     }
-    // console.log(data.deals);
+
+    const locationCoordinates = [];
     for (const location of data.deals) {
       // console.log(location.deal);
       createHotCard(location.deal);
+
+      const coord = {
+        'lat': location.deal.merchant.latitude,
+        'lng': location.deal.merchant.longitude
+      }
+      locationCoordinates.push(coord);
+      // console.log(locationCoordinates);
     }
+    // CLICK EVENT ON TAB2
+    $('#tab2').on('click', () => {
+      initMap(locationCoordinates);
+    })
   });
 
   $xhr.fail((err) => {
@@ -100,8 +134,8 @@
       }
 
       $('#hotrow').empty();
-      console.log(data.deals);
       for (const location of data.deals) {
+        console.log(location.deal);
         createHotCard(location.deal);
       }
     });
@@ -110,6 +144,4 @@
       console.error(err);
     })
   });
-
-
 })();

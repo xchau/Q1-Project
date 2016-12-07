@@ -137,3 +137,16 @@ h3 {
   line-height: 2.5;
   padding: 20px 80px;
 }
+
+/* GOOGLE MAP STYLES */
+#map {
+  background-color: grey;
+  height: 400px;
+  /*overflow: visible;*/
+  width: 100%;
+}
+
+.mapSpace {
+  background-color: white;
+  padding: 30px;
+}
