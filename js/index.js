@@ -10,6 +10,10 @@
     $('.collapsible').collapsible();
   });
 
+  $(document).ready(function(){
+    $('.modal').modal();
+  });
+
   // MARKER & INFOWINDOW COMPONENTS
   const mapLabels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   let labelIndex = 0;

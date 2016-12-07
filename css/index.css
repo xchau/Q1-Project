@@ -79,15 +79,10 @@ h3 {
   box-shadow: 1px 1px 3px 1px #3c3a3b;
 }
 
-/* TABS */
-/*.tabs .tab a.active {
-  font-size: 16px;
-  font-weight: 600;
-}*/
-
 /* MAP SECTION */
 #mapContainer {
-  background-color: #fffde7;
+  background-color: white;
+  /*background-color: #fffde7;*/
   margin: 0px;
   min-height: 20px;
   padding: 40px 120px;
@@ -135,7 +130,7 @@ h3 {
 }
 
 .descText {
-  font-size: 20px;
+  font-size: 1.5vw;
   line-height: 2.5;
   padding: 20px 80px;
 }
@@ -169,7 +164,22 @@ h3 {
   height: 40%;
 }
 
+/* COLLAPSIBLE STYLES */
+.labelDiv {
+  width: 80%;
+}
+
 .collapseLabel {
-  font-size: 20px;
+  font-size: 2.4vw;
   margin: 0px;
+}
+
+/* MODAL STYLES */
+.modalContent h4 {
+  color: #5c5c6b;
+}
+
+.modalContent p {
+  margin-bottom: 0;
+  line-height: 1.5;
 }
