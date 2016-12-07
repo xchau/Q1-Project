@@ -1,9 +1,13 @@
 (function() {
   'use strict';
 
-  // MATERIALIZE PARALLAX //
+  // MATERIALIZE INIT //
   $(document).ready(() => {
     $('.parallax').parallax();
+  });
+
+  $(document).ready(() => {
+    $('.collapsible').collapsible();
   });
 
   // MARKER & INFOWINDOW COMPONENTS
