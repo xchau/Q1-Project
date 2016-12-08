@@ -1,30 +1,68 @@
 (function() {
   'use strict';
 
-  // MATERIALIZE PARALLAX
+  // MATERIALIZE INIT //
   $(document).ready(() => {
     $('.parallax').parallax();
   });
 
-  const createHotCard = function(deal) {
-    // card element
-    const $colDiv = $('<div>').addClass('col s3');
+  $(document).ready(() => {
+    $('.collapsible').collapsible();
+  });
+
+  $(document).ready(function() {
+    $('.modal').modal();
+  });
+
+  $(document).ready(function(){
+    $('.tooltipped').tooltip({delay: 50});
+  });
+
+  // let notVisited = JSON.parse(localStorage.getItem('notVisited')) || true;
+  localStorage.removeItem('notVisited');
+  localStorage.setItem('notVisited', JSON.stringify(true));
+
+  if (notVisited) {
+    localStorage.setItem('notVisited', JSON.stringify(false));
+
+    $('#help').addClass('hideToast');
+  }
+  else {
+    return;
+  }
+
+  // BROWSER GEOLOCATION //
+  // const userCoord = {};
+  //
+  // const geoSuccess = function(pos) {
+  //   userCoord.lat = pos.coords.latitude;
+  //   userCoord.lng = pos.coords.longitude;
+  // };
+  //
+  // const geoFailure = function(err) {
+  //   console.warn(`ERROR (${err.code}): ` + err.message);
+  // }
+  //
+  // navigator.geolocation.getCurrentPosition(geoSuccess, geoFailure);
+  // localStorage.setItem('userCoord', JSON.stringify(userCoord));
+
+  // CREATE DEAL CARD FUNCTION //
+  const createCard = function(deal) {
+    const $colDiv = $('<div>').addClass('col s6 l3');
     const $cardDiv = $('<div>').addClass('card dealcard');
 
-    // card image
     const $cardImgDiv = $('<div>').addClass('card-image waves-effect waves-block waves-light dealimage');
     const $cardImg = $('<img>').addClass('activator').prop('src', deal.image_url);
 
     $cardImg.prop('onerror', 'this.src ="assets/404.jpg"');
     $cardImg.appendTo($cardImgDiv);
 
-    // card content
     const $cardContentDiv = $('<div>').addClass('card-content dealcontent lowPad row');
     const $cardSpanOne = $('<span>').addClass('card-title activator grey-text text-darken-4 cardTitle');
     $cardSpanOne.text(deal.short_title.toUpperCase());
-    const $vertIcon = $('<i>').addClass('material-icons activator hoverFinger right');
+    const $vertIcon = $('<i>').addClass('material-icons activator hoverFinger right red-text text-lighten-2');
     const $spacerOne = $('<div>').addClass('col s10 tbMargin');
-    const $spacerTwo = $('<div>').addClass('col s1 offset-s1');
+    const $spacerTwo = $('<div>').addClass('col s1 offset-s1 smallHide');
 
     $vertIcon.text('more_vert');
     $vertIcon.appendTo($spacerTwo);
@@ -40,19 +78,17 @@
     $cardLink.appendTo($pOne);
     $pOne.appendTo($cardContentDiv);
 
-    // card reveal
     const $cardRevealDiv = $('<div>').addClass('card-reveal');
     const $cardSpanTwo = $('<span>').addClass('card-title grey-text text-darken-4');
 
     $cardSpanTwo.text(deal.short_title);
     $cardSpanTwo.appendTo($cardRevealDiv);
 
-    const $pTwo = $('<p>');
+    const $pTwo = $('<p>').addClass('cardDescription');
 
     $pTwo.html(deal.description);
     $pTwo.appendTo($cardRevealDiv);
 
-    // append to card element
     $cardImgDiv.appendTo($cardDiv);
     $cardContentDiv.appendTo($cardDiv);
     $cardRevealDiv.appendTo($cardDiv);
@@ -60,28 +96,16 @@
     $('#deals').append($colDiv);
   };
 
-  // FILL contentStrings ARRAY FOR INFO WINDOW
-  const contentStrings = [];
-  let stringIndex = 0;
-
-  const pushContentStrings = function(arrayOfDeals) {
-    console.log(arrayOfDeals.length);
-    for (const location of arrayOfDeals) {
-      contentStrings.push('<div id="content">' + '<div class="infoHeader">' + `<h1 class="infoH1">${location.deal.short_title}</h1>` + '</div>' +
-      '<div class="infoBody">' + `<a href="${location.deal.untracked_url}" class="infoLink">Check it out!</a>` + '</div>' + '</div>'
-      );
-    }
-    console.log(contentStrings);
-  };
-
-  // GENERATE GOOGLE map
+  // MARKER & INFOWINDOW COMPONENTS //
   const mapLabels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  let labelIndex = 0;
+  let locationNames = [];
+  let labelIndex;
+  let namesIndex;
 
-  const locationNames = [];
-  let namesIndex = 0;
-
-  const initMap = function(arrayOfCoordinates, arrayOfDeals) {
+  // GENERATE INITIAL GOOGLE MAP //
+  const generateMap = function(arrayOfDeals, arrayOfCoordinates) {
+    // console.log(arrayOfDeals);
+    // console.log(arrayOfCoordinates);
     const current = {
       lat: 47.598962,
       lng: -122.333799
@@ -92,33 +116,35 @@
       center: current
     });
 
-    pushContentStrings(arrayOfDeals);
+    labelIndex = 0;
+    namesIndex = 0;
 
-    for (const contentString of contentStrings) {
+    for (let i = 0; i < arrayOfDeals.length; i++) {
+      const contentString = '<div class="infoContainer">' + '<div><h2 class="infoTitle">' + arrayOfDeals[i].short_title + '</h2></div><div"><a href="' + arrayOfDeals[i].untracked_url + '" class="infoLink" target="_blank">Offered by ' + arrayOfDeals[i].provider_name + '<span><i class="material-icons infoIcon">add_shopping_cart</i></span></a>' + '<span>|</span><a href="' + arrayOfDeals[i].merchant.url + '">' + arrayOfDeals[i].merchant.name + '<span><i class="material-icons infoIcon">domain</i></span></a></div><div class="infoDescription">' + arrayOfDeals[i].description + '</div></div>';
+
       const infowindow = new google.maps.InfoWindow({
         content: contentString
       });
-    }
 
-    // create markers for each location
-    for (const coord of arrayOfCoordinates) {
       const marker = new google.maps.Marker({
-        position: coord,
+        position: arrayOfCoordinates[i],
         label: mapLabels[labelIndex++ % mapLabels.length],
         title: locationNames[namesIndex++ % locationNames.length],
         map: map
       });
 
-      marker.addEventListener('click', () => {
+      marker.addListener('click', () => {
         infowindow.open(map, marker);
       });
     }
   };
 
-  // POPULATE CONTENT DIV WITH LOCAL DEALS
+  // MAKE INITIAL AJAX CALL //
+  let currentDeals = [];
+
   const $xhr = $.ajax({
     method: 'GET',
-    url: 'https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events,retail-services&per_page=12&radius=10&location=47.598962,-122.333799',
+    url: 'https://api.sqoot.com/v2/deals?api_key=9oll4i&category_slugs=dining-nightlife,activities-events,retail-services&per_page=12&radius=10&location=47.598962,-122.333799',
     dataType: 'json'
   });
 
@@ -130,7 +156,8 @@
     const locationCoordinates = [];
 
     for (const location of data.deals) {
-      createHotCard(location.deal);
+      currentDeals.push(location.deal);
+      locationNames.push(location.deal.merchant.name);
 
       const coord = {
         lat: location.deal.merchant.latitude,
@@ -138,13 +165,9 @@
       };
 
       locationCoordinates.push(coord);
-      locationNames.push(location.deal.merchant.name);
+      createCard(location.deal);
     }
-
-    // CLICK EVENT ON TAB2
-    $('#tab2').on('click', () => {
-      initMap(locationCoordinates, data.deals);
-    });
+    generateMap(currentDeals, locationCoordinates);
   });
 
   $xhr.fail((err) => {
@@ -160,7 +183,7 @@
     const $userQuery = $('#userQuery').val();
     const $xhrSearch = $.ajax({
       method: 'GET',
-      url: `https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events,retail-services&per_page=12&radius=10&location=47.598962,-122.333799&query=${$userQuery}`,
+      url: `https://api.sqoot.com/v2/deals?api_key=9oll4i&category_slugs=dining-nightlife,activities-events,retail-services&per_page=12&radius=10&location=47.598962,-122.333799&query=${$userQuery}`,
       dataType: 'json'
     });
 
@@ -169,10 +192,24 @@
         return;
       }
 
-      $('#hotrow').empty();
+      const userLocationCoordinates = [];
+
+      currentDeals = [];
+      locationNames = [];
+
+      $('#deals').empty();
       for (const location of data.deals) {
-        createHotCard(location.deal);
+        currentDeals.push(location.deal);
+        locationNames.push(location.deal.merchant.name);
+        const userCoord = {
+          lat: location.deal.merchant.latitude,
+          lng: location.deal.merchant.longitude
+        };
+
+        userLocationCoordinates.push(userCoord);
+        createCard(location.deal);
       }
+      generateMap(currentDeals, userLocationCoordinates);
     });
 
     $xhrSearch.fail((err) => {

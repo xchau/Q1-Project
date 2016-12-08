@@ -14,6 +14,23 @@
     $('.modal').modal();
   });
 
+  $(document).ready(function(){
+    $('.tooltipped').tooltip({delay: 50});
+  });
+
+  // let notVisited = JSON.parse(localStorage.getItem('notVisited')) || true;
+  localStorage.removeItem('notVisited');
+  localStorage.setItem('notVisited', JSON.stringify(true));
+
+  if (notVisited) {
+    localStorage.setItem('notVisited', JSON.stringify(false));
+
+    $('#help').addClass('hideToast');
+  }
+  else {
+    return;
+  }
+
   // BROWSER GEOLOCATION //
   // const userCoord = {};
   //
@@ -199,22 +216,4 @@
       console.error(err);
     });
   });
-
-//   $('#mapContainer').hover(function() {
-//     $(document).bind('mousewheel DOMMouseScroll',function(){
-//       stopWheel();
-//     });
-//   }, function() {
-//     $(document).unbind('mousewheel DOMMouseScroll');
-//   });
-//
-// function stopWheel(e){
-//   if(!e){ /* IE7, IE8, Chrome, Safari */
-//       e = window.event;
-//   }
-//   if(e.preventDefault) { /* Chrome, Safari, Firefox */
-//       e.preventDefault();
-//   }
-//   e.returnValue = false; /* IE7, IE8 */
-// }
 })();

@@ -4,9 +4,11 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       <meta charset="utf-8">
 
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans|Josefin-Sans" rel="stylesheet">
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen"/>
       <link type="text/css" rel="stylesheet" href="css/index.css">
+
 
       <script defer src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       <script defer src="js/materialize.min.js"></script>
@@ -21,139 +23,152 @@
       <nav>
         <div class="nav-wrapper yellow accent-1">
           <a href="#" class="brand-logo center">
-            <img class="logo" src="assets/logo-lr.png" alt="logo">
+            <img class="logo" src="assets/logo-v2.png" alt="logo">
           </a>
         </div>
       </nav>
 
       <main>
 
-        <header class="parallax-container heroHeader">
+        <header class="parallax-container heroHeader z-depth-1">
           <div class="section full-height">
             <br><br>
             <section class="heroSection z-depth-1">
               <h3 class="yellow-text text-lighten-2 center container lrPadded">
               Live a full life without spending full price
-            </h3>
+              </h3>
             </section>
-
             <div class="container fullHeight">
               <div class="row center">
                 <form class="container">
                   <div class="input-field">
                     <input id="userQuery" type="search" required>
-                    <label for="userQuery">
+                    <label for="userQuery" class="buttonCol">
                       <i class="material-icons yellow-text">search</i>
                     </label>
-                    <button id="submitButton" class="btn waves-effect waves-light" type="submit" name="action">Submit
-                      <i class="material-icons right">send</i>
-                    </button>
                   </div>
+                  <button id="submitButton" class="btn waves-effect waves-light red lighten-2" type="submit" name="action">
+                    <i class="material-icons center-align">send</i>
+                  </button>
                 </form>
               </div>
             </div>
-
-
           </div>
           <div class="col s8 offset-s2 center parallax">
             <img src="assets/coffee-shop.jpg" alt="coffee-shop">
           </div>
         </header>
 
-
         <div class="row">
-          <div class="col s12 flexCenter">
-            <ul class="tabs">
-              <li id="tab1" class="tab active">
-                <a href="#tabContent1">Miserly Deals</a>
+          <div class="col s12">
+            <ul class="tabs flexCenter" style="margin-top: 15px">
+              <li id="tab1" class="tab active tabDiv">
+                <a href="#tabContent1">Map<i class="material-icons" style="margin-left: 5px; font-size: 15px">map</i></a>
               </li>
-              <li id="tab2" class="tab">
-                <a href="#tabContent2">Map</a>
+              <li id="tab2" class="tab tabDiv">
+                <a href="#tabContent2">Deals<i class="material-icons" style="margin-left: 5px; font-size: 15px">local_offer</i></a>
               </li>
             </ul>
           </div>
           <div id="tabContent1" class="col s12">
-            <section id="hotdeals">
-              <div id="hotrow" class="row no-margin">
-                <!--Deal cards go here-->
+            <a id="help" class="btn-floating btn-large waves-effect waves-light yellow lighten-3 tooltipped" data-position="top" data-delay="50" data-tooltip="Here are some sweet deals near you now"><i class="material-icons red-text text-lighten-2">help_outline</i></a>
+            <section id="mapContainer">
+              <div id="map" class="z-depth-2">
+
               </div>
             </section>
           </div>
           <div id="tabContent2" class="col s12">
-            <!-- <div class="mapSpace"> -->
-              <div id="map">
-                <!--Map goes here-->
-              </div>
-            <!-- </div> -->
+            <div id="deals" class="row no-margin">
+
+            </div>
+            <div id="moreDiv" class="row flexCenter">
+              <i id="moreResults" class="material-icons">control_point</i>
+            </div>
           </div>
         </div>
 
+        <section id="collapsibles">
+          <ul class="collapsible no-margin" data-collapsible="accordion">
+            <li>
+              <div class="collapsible-header row no-margin white red-text lighten-2 z-depth-2">
+                <div class="col s4 offset-s3 labelDiv">
+                  <p class="collapseLabel right-align">What is Miser™?</p>
+                </div>
+                <div class="col s2 offset-s3 toRight">
+                  <i class="material-icons right-align">keyboard_arrow_down</i>
+                </div>
+              </div>
+              <div class="collapsible-body">
 
+                <section id="firstDesc" class="miserDescription row">
+                  <div class="col s6 descCol white" style="display: flex; justify-content: center; align-items: center;">
+                    <p class="descText center-align">
+                    Don't blow your budget on a night out. We'll help you search for fantastic yet affordable dining and entertainment opportunities around you. Wherever life takes you, do it wiser, use Miser™.
+                    </p>
+                  </div>
+                  <div class="col s6 parallax-container descCol">
+                    <div class="parallax">
+                      <img src="assets/travel-1.jpeg" alt="travel" class="descImg">
+                    </div>
+                  </div>
+                </section>
 
+                <section id="secondDesc" class="miserDescription row">
+                  <div class="col s6 parallax-container descCol">
+                    <div class="parallax">
+                      <img src="assets/eating-1.jpeg" alt="restaurant" class="descImg">
+                    </div>
+                  </div>
+                  <div class="col s6 descCol yellow lighten-5" style="display: flex; justify-content: center; align-items: center;">
+                    <p class="descText center-align">
+                      Looking for something sweet? We got you covered. Type a keyword into the search field above to get started.
+                    </p>
+                  </div>
+                </section>
 
+                <section id="thirdDesc" class="miserDescription row">
+                  <div class="col s6 descCol yellow lighten-5" style="display: flex; justify-content: center; align-items: center;">
+                    <p class="descText center-align">
+                      Map out your surrounding area to reveal the Miser Deals™ awaiting you. Don't like what you see? Click on the  <i class="material-icons">control_point</i>  icon to find more deals.
+                    </p>
+                  </div>
+                  <div class="col s6 parallax-container descCol">
+                    <div class="parallax">
+                      <img src="assets/concert.jpg" alt="concert" class="descImg">
+                    </div>
+                  </div>
+                </section>
 
-        <!-- <p>
-          <button onclick="geoFindMe()">
-            Show my location
-          </button>
-        </p>
-        <div id="out"></div> -->
-
-        <section id="firstDesc" class="serviceDescription row">
-          <div class="col s6 descCol yellow lighten-5 z-depth-1" style="display: flex; justify-content: center; align-items: center;">
-            <p class="descText center-align">
-              Don't blow your budget on a night out. Search for fantastic yet affordable dining and entertainment opportunities around you. Wherever life takes you, do it wiser, use Miser™.
-            </p>
-          </div>
-          <div class="col s6 parallax-container descCol">
-            <div class="parallax">
-              <img src="assets/travel-1.jpeg" alt="travel">
-            </div>
-          </div>
+              </div>
+            </li>
+          </ul>
         </section>
-
-        <section id="secondDesc" class="serviceDescription row">
-          <div class="col s6 parallax-container descCol">
-            <div class="parallax">
-              <img src="assets/eating-1.jpeg" alt="restaurant">
-            </div>
-          </div>
-          <div class="col s6 descCol yellow lighten-5 z-depth-1" style="display: flex; justify-content: center; align-items: center;">
-            <p class="descText center-align">
-              Looking for something sweet? We got you covered. Type a keyword into the search field above to get started.
-            </p>
-          </div>
-        </section>
-
-        <section id="thirdDesc" class="serviceDescription row">
-          <div class="col s6 descCol yellow lighten-5 z-depth-1" style="display: flex; justify-content: center; align-items: center;">
-            <p class="descText center-align">
-              Map out your surrounding area to reveal the Miserly Deals™ awaiting you.
-            </p>
-          </div>
-          <div class="col s6 parallax-container descCol">
-            <div class="parallax">
-              <img src="assets/concert.jpg" alt="concert">
-            </div>
-          </div>
-        </section>
-
       </main>
 
       <footer class="page-footer yellow accent-1" style="margin: 0px">
          <div class="container">
            <div class="row">
              <div class="col l6 s12">
-               <h5 class="blue-grey-text">Footer Content</h5>
-               <p class="grey-text blue-grey-text">You can use rows and columns here to organize your footer content.</p>
+               <h5 class="blue-grey-text">Miser™</h5>
+               <p class="grey-text blue-grey-text">Power by Sqoot API</p>
              </div>
 
            </div>
          </div>
          <div class="footer-copyright">
            <div class="container blue-grey-text">
-           © 2016 Miser
-           <a class="blue-grey-text text-darken-1 right" href="#!">Contact Us</a>
+           <span>© 2016 Galvanize Q1 Project</span>
+           <a class="blue-grey-text text-darken-1 right" href="#contact">
+             Contact Us
+           </a>
+           <div id="contact" class="modal">
+            <div class="modal-content modalContent">
+              <h5>We'd love to hear from you</h5>
+              <p>By phone: ###-###-####</p>
+              <p>By email: minhchau@miser.com</p>
+            </div>
+          </div>
            </div>
          </div>
        </footer>
