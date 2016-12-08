@@ -14,6 +14,22 @@
     $('.modal').modal();
   });
 
+  // BROWSER GEOLOCATION //
+  const userCoord = {};
+
+  const geoSuccess = function(pos) {
+    userCoord.lat = pos.coords.latitude;
+    userCoord.lng = pos.coords.longitude;
+  };
+
+  const geoFailure = function(err) {
+    console.warn(`ERROR (${err.code}): ` + err.message);
+  }
+
+  navigator.geolocation.getCurrentPosition(geoSuccess, geoFailure);
+
+  console.log(userCoord);
+
   // CREATE DEAL CARD FUNCTION //
   const createCard = function(deal) {
     const $colDiv = $('<div>').addClass('col s3');
