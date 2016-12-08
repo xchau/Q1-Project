@@ -27,8 +27,7 @@
   }
 
   navigator.geolocation.getCurrentPosition(geoSuccess, geoFailure);
-
-  console.log(userCoord);
+  localStorage.setItem('userCoord', JSON.stringify(userCoord));
 
   // CREATE DEAL CARD FUNCTION //
   const createCard = function(deal) {
@@ -128,7 +127,7 @@
 
   const $xhr = $.ajax({
     method: 'GET',
-    url: 'https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events,retail-services&per_page=12&radius=10&location=47.598962,-122.333799',
+    url: 'https://api.sqoot.com/v2/deals?api_key=9oll4i&category_slugs=dining-nightlife,activities-events,retail-services&per_page=12&radius=10&location=47.598962,-122.333799',
     dataType: 'json'
   });
 
@@ -167,7 +166,7 @@
     const $userQuery = $('#userQuery').val();
     const $xhrSearch = $.ajax({
       method: 'GET',
-      url: `https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events,retail-services&per_page=12&radius=10&location=47.598962,-122.333799&query=${$userQuery}`,
+      url: `https://api.sqoot.com/v2/deals?api_key=9oll4i&category_slugs=dining-nightlife,activities-events,retail-services&per_page=12&radius=10&location=47.598962,-122.333799&query=${$userQuery}`,
       dataType: 'json'
     });
 
@@ -200,4 +199,22 @@
       console.error(err);
     });
   });
+
+//   $('#mapContainer').hover(function() {
+//     $(document).bind('mousewheel DOMMouseScroll',function(){
+//       stopWheel();
+//     });
+//   }, function() {
+//     $(document).unbind('mousewheel DOMMouseScroll');
+//   });
+//
+// function stopWheel(e){
+//   if(!e){ /* IE7, IE8, Chrome, Safari */
+//       e = window.event;
+//   }
+//   if(e.preventDefault) { /* Chrome, Safari, Firefox */
+//       e.preventDefault();
+//   }
+//   e.returnValue = false; /* IE7, IE8 */
+// }
 })();
