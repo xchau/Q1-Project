@@ -15,23 +15,23 @@
   });
 
   // BROWSER GEOLOCATION //
-  const userCoord = {};
-
-  const geoSuccess = function(pos) {
-    userCoord.lat = pos.coords.latitude;
-    userCoord.lng = pos.coords.longitude;
-  };
-
-  const geoFailure = function(err) {
-    console.warn(`ERROR (${err.code}): ` + err.message);
-  }
-
-  navigator.geolocation.getCurrentPosition(geoSuccess, geoFailure);
-  localStorage.setItem('userCoord', JSON.stringify(userCoord));
+  // const userCoord = {};
+  //
+  // const geoSuccess = function(pos) {
+  //   userCoord.lat = pos.coords.latitude;
+  //   userCoord.lng = pos.coords.longitude;
+  // };
+  //
+  // const geoFailure = function(err) {
+  //   console.warn(`ERROR (${err.code}): ` + err.message);
+  // }
+  //
+  // navigator.geolocation.getCurrentPosition(geoSuccess, geoFailure);
+  // localStorage.setItem('userCoord', JSON.stringify(userCoord));
 
   // CREATE DEAL CARD FUNCTION //
   const createCard = function(deal) {
-    const $colDiv = $('<div>').addClass('col s3');
+    const $colDiv = $('<div>').addClass('col s6 l3');
     const $cardDiv = $('<div>').addClass('card dealcard');
 
     const $cardImgDiv = $('<div>').addClass('card-image waves-effect waves-block waves-light dealimage');
@@ -43,9 +43,9 @@
     const $cardContentDiv = $('<div>').addClass('card-content dealcontent lowPad row');
     const $cardSpanOne = $('<span>').addClass('card-title activator grey-text text-darken-4 cardTitle');
     $cardSpanOne.text(deal.short_title.toUpperCase());
-    const $vertIcon = $('<i>').addClass('material-icons activator hoverFinger right');
+    const $vertIcon = $('<i>').addClass('material-icons activator hoverFinger right red-text text-lighten-2');
     const $spacerOne = $('<div>').addClass('col s10 tbMargin');
-    const $spacerTwo = $('<div>').addClass('col s1 offset-s1');
+    const $spacerTwo = $('<div>').addClass('col s1 offset-s1 smallHide');
 
     $vertIcon.text('more_vert');
     $vertIcon.appendTo($spacerTwo);
@@ -67,7 +67,7 @@
     $cardSpanTwo.text(deal.short_title);
     $cardSpanTwo.appendTo($cardRevealDiv);
 
-    const $pTwo = $('<p>');
+    const $pTwo = $('<p>').addClass('cardDescription');
 
     $pTwo.html(deal.description);
     $pTwo.appendTo($cardRevealDiv);
@@ -103,7 +103,7 @@
     namesIndex = 0;
 
     for (let i = 0; i < arrayOfDeals.length; i++) {
-      const contentString = '<div class="infoContainer">' + '<div><h2 class="infoTitle">' + arrayOfDeals[i].short_title + '</h2></div><div><a href="' + arrayOfDeals[i].untracked_url + '" class="infoLink" target="_blank">Offered by ' + arrayOfDeals[i].provider_name + '<span><i class="material-icons infoIcon">add_shopping_cart</i></span></a>' + '<span>|</span><a href="' + arrayOfDeals[i].merchant.url + '">' + arrayOfDeals[i].merchant.name + '<span><i class="material-icons infoIcon">domain</i></span></a></div><div class="infoDescription">' + arrayOfDeals[i].description + '</div></div>';
+      const contentString = '<div class="infoContainer">' + '<div><h2 class="infoTitle">' + arrayOfDeals[i].short_title + '</h2></div><div"><a href="' + arrayOfDeals[i].untracked_url + '" class="infoLink" target="_blank">Offered by ' + arrayOfDeals[i].provider_name + '<span><i class="material-icons infoIcon">add_shopping_cart</i></span></a>' + '<span>|</span><a href="' + arrayOfDeals[i].merchant.url + '">' + arrayOfDeals[i].merchant.name + '<span><i class="material-icons infoIcon">domain</i></span></a></div><div class="infoDescription">' + arrayOfDeals[i].description + '</div></div>';
 
       const infowindow = new google.maps.InfoWindow({
         content: contentString

@@ -1,216 +1,470 @@
-html {
-  font-size: 100%;
+@media (min-width: 700px) {
+  html {
+    font-size: 100%;
+  }
+
+  body {
+     display: flex;
+     flex-direction: column;
+     min-height: 100vh;
+   }
+
+   main {
+     flex: 1 0 auto;
+   }
+
+  h5 {
+   font-size: 1.5rem;
+   font-weight: 600;
+  }
+
+  h4 {
+    font-size: 1.2rem;
+  }
+
+  .parallax-container {
+    height: 350px;
+  }
+
+  .tbMargin {
+    margin: 5px 0px;
+  }
+
+  .lowPad {
+    padding: 10px 15px !important;
+  }
+
+  .no-margin {
+    margin: 0px;
+  }
+
+  .toRight {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .flexCenter {
+    display: flex;
+    justify-content: center;
+  }
+
+  .logo {
+    height: 70px;
+  }
+
+  /* HERO SECTION */
+  h3 {
+    font-size: 2rem;
+  }
+
+  .heroHeader {
+    height: 350px;
+  }
+
+  .lrPadded {
+    padding: 0px 10px;
+  }
+
+  .heroSection {
+    align-items: center;
+    background-color: rgba(180, 180, 180, .4);
+    display: flex;
+    height: 80px;
+    justify-content: center;
+    margin-bottom: 25px;
+    width: 100%;
+  }
+
+  .fullHeight {
+    height: 100%;
+  }
+
+  #userQuery {
+    background-color: white;
+    box-shadow: 1px 1px 3px 1px #3c3a3b;
+  }
+
+  /* TAB STYLES */
+  .tab a.active {
+    color: #ee6e73;
+    font-size: 1.3rem !important;
+    font-weight: 600;
+  }
+
+  .tab a {
+    font-size: 1.1rem !important;
+  }
+
+  .tabDiv {
+    width: 120px;
+    left: -20px;
+  }
+
+  /* MAP SECTION */
+  #mapContainer {
+    background-color: white;
+    /*background-color: #fffde7;*/
+    display: flex;
+    justify-content: center;
+    margin: 0px;
+    min-height: 20px;
+    padding: 20px;
+    width: 100%;
+  }
+
+  #map {
+    background-color: grey;
+    min-height: 40vw;
+    width: 70%;
+  }
+
+  .mapTitle {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0px;
+  }
+
+  .mapTitle h3 {
+    font-size: 1.5rem;
+    margin: 0px;
+  }
+
+  /* INFO CARD STYLES */
+  .infoTitle {
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+
+  .infoLink {
+    color: lightcoral;
+    font-style: italic;
+  }
+
+  .infoDescription a {
+    font-style: italic;
+  }
+
+  .infoContainer span {
+    margin: 0px 8px;
+  }
+
+  .infoIcon {
+    font-size: 1.2rem;;
+    margin-left: 0px 4px;
+  }
+
+  /* DESCRIPTION SECTIONS */
+  #deals span {
+    font-size: 1.4rem;
+    font-weight: 500;
+  }
+
+  .miserDescription {
+    margin-bottom: 0px;
+  }
+
+  .descCol {
+    height: 300px;
+  }
+
+  .descText {
+    font-size: 1.3rem;
+    line-height: 2.5;
+    padding: 20px 80px;
+  }
+
+  /* DEAL CARD STYLES */
+  .cardTitle {
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+    line-height: normal !important;
+  }
+
+  .cardText {
+    color: lightcoral;
+    font-size: 0.82rem !important;
+    line-height: 1.25;
+  }
+
+  .hoverFinger {
+    cursor: pointer;
+  }
+
+  .dealcard {
+    height: 300px;
+  }
+
+  .dealimage {
+    height: 60%;
+  }
+
+  .dealcontent {
+    height: 40%;
+  }
+
+  /* COLLAPSIBLE STYLES */
+  .labelDiv {
+    width: 80%;
+  }
+
+  .collapseLabel {
+    font-size: 2rem;
+    margin: 0px;
+  }
+
+  /* MODAL STYLES */
+  .modalContent h4 {
+    color: #5c5c6b;
+  }
+
+  .modalContent p {
+    margin-bottom: 0;
+    line-height: 1.5;
+  }
 }
 
-body {
-   display: flex;
-   flex-direction: column;
-   min-height: 100vh;
- }
 
- main {
-   flex: 1 0 auto;
- }
 
-h5 {
- font-size: 1.5rem;
- font-weight: 600;
-}
 
-h4 {
-  font-size: 1.2rem;
-}
+/* SMALL SCREENS */
+@media (max-width: 700px) {
+  html {
+    font-size: 100%;
+  }
 
-.parallax-container {
-  height: 350px;
-}
+  body {
+     display: flex;
+     flex-direction: column;
+     min-height: 100vh;
+   }
 
-.tbMargin {
-  margin: 5px 0px;
-}
+   main {
+     flex: 1 0 auto;
+   }
 
-.lowPad {
-  padding: 10px 15px !important;
-}
+  h5 {
+   font-size: 1.2rem;
+   font-weight: 600;
+  }
 
-.no-margin {
-  margin: 0px;
-}
+  h4 {
+    font-size: 0.9rem;
+  }
 
-.toRight {
-  display: flex;
-  justify-content: flex-end;
-}
+  .parallax-container {
+    height: 300px;
+  }
 
-.flexCenter {
-  display: flex;
-  justify-content: center;
-}
+  .tbMargin {
+    margin: 2px 0px;
+    padding: 0px;
+  }
 
-.logo {
-  height: 70px;
-}
+  .no-margin {
+    margin: 0px;
+  }
 
-/* HERO SECTION */
-h3 {
-  font-size: 2rem;
-}
+  .toRight {
+    display: flex;
+    justify-content: flex-end;
+  }
 
-.heroHeader {
-  height: 350px;
-}
+  .flexCenter {
+    display: flex;
+    justify-content: center;
+  }
 
-.lrPadded {
-  padding: 0px 10px;
-}
+  .logo {
+    height: 55px;
+  }
 
-.heroSection {
-  align-items: center;
-  background-color: rgba(180, 180, 180, .4);
-  display: flex;
-  height: 80px;
-  justify-content: center;
-  margin-bottom: 25px;
-  width: 100%;
-}
+  /* HERO SECTION */
+  h3 {
+    font-size: 1.1rem;
+  }
 
-.fullHeight {
-  height: 100%;
-}
+  .heroHeader {
+    height: 250px;
+  }
 
-#userQuery {
-  background-color: white;
-  box-shadow: 1px 1px 3px 1px #3c3a3b;
-}
+  .lrPadded {
+    padding: 0px 10px;
+  }
 
-/* TAB STYLES */
-.tab a.active {
-  color: #ee6e73;
-  font-size: 1.3rem !important;
-  font-weight: 600;
-}
+  .heroSection {
+    align-items: center;
+    background-color: rgba(180, 180, 180, .4);
+    display: flex;
+    height: 50px;
+    justify-content: center;
+    margin-bottom: 25px;
+    width: 100%;
+  }
 
-.tab a {
-  font-size: 1.1rem !important;
-}
+  .fullHeight {
+    height: 100%;
+  }
 
-/* MAP SECTION */
-#mapContainer {
-  background-color: white;
-  /*background-color: #fffde7;*/
-  margin: 0px;
-  min-height: 20px;
-  padding: 30px 175px 35px 175px;
-  width: 100%;
-}
+  #submitButton {
+    font-size: 0.6rem;
+    padding: 0px 5px;
+    width: 90px;
+  }
 
-#map {
-  background-color: grey;
-  min-height: 44vw;
-  width: 100%;
-}
+  #userQuery {
+    background-color: white;
+    box-shadow: 1px 1px 3px 1px #3c3a3b;
+  }
 
-.mapTitle {
-  display: flex;
-  justify-content: center;
-  margin: 10px 0px;
-}
+  /* TAB STYLES */
+  .tab a.active {
+    color: #ee6e73;
+    font-size: 0.9rem !important;
+    font-weight: 600;
+  }
 
-.mapTitle h3 {
-  font-size: 1.5rem;
-  margin: 0px;
-}
+  .tab a {
+    font-size: 0.8rem !important;
+  }
 
-/* INFO CARD STYLES */
-.infoTitle {
-  font-size: 1.3rem;
-  font-weight: 600;
-  text-decoration: underline;
-}
+  /* MAP SECTION */
+  #mapContainer {
+    background-color: white;
+    margin: 0px;
+    min-height: 20px;
+    padding: 15px 25px 15px 25px;
+    width: 100%;
+  }
 
-.infoLink {
-  color: lightcoral;
-  font-style: italic;
-}
+  #map {
+    background-color: grey;
+    min-height: 44vw;
+    width: 100%;
+  }
 
-.infoDescription a {
-  font-style: italic;
-}
+  /* INFO CARD STYLES */
+  .infoTitle {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-decoration: underline;
+  }
 
-.infoContainer span {
-  margin: 0px 8px;
-}
+  .infoLink {
+    color: lightcoral;
+    font-style: italic;
+  }
 
-.infoIcon {
-  font-size: 1.2rem;;
-  margin-left: 0px 4px;
-}
+  .infoDescription {
+    font-size: 0.56rem;
+  }
 
-/* DESCRIPTION SECTIONS */
-#deals span {
-  font-size: 1.4rem;
-  font-weight: 500;
-}
+  .infoDescription a {
+    font-size: 0.5rem;
+    font-style: italic;
+  }
 
-.serviceDescription {
-  margin-bottom: 0px;
-}
+  .infoContainer span {
+    margin: 0px 3px;
+  }
 
-.descCol {
-  height: 300px;
-}
+  .infoIcon {
+    font-size: 1.2rem;;
+    margin-left: 0px 4px;
+  }
 
-.descText {
-  font-size: 1.3rem;
-  line-height: 2.5;
-  padding: 20px 80px;
-}
+  /* DESCRIPTION SECTIONS */
+  .miserDescription {
+    font-size: 0.7rem;
+    margin-bottom: 0px;
+  }
 
-/* DEAL CARD STYLES */
-.cardTitle {
-  font-size: 0.9rem !important;
-  font-weight: 600 !important;
-  line-height: normal !important;
-}
+  .descCol {
+    height: 200px;
+  }
 
-.cardText {
-  color: lightcoral;
-  font-size: 0.82rem !important;
-  line-height: 1.25;
-}
+  .descText {
+    font-size: 0.7rem;
+    line-height: 1.5;
+    padding: 2px 4px;
+  }
 
-.hoverFinger {
-  cursor: pointer;
-}
+  .descImg {
+    height: 100%;
+  }
 
-.dealcard {
-  height: 300px;
-}
+  /* DEAL CARD STYLES */
+  .cardTitle {
+    font-size: 0.4rem !important;
+    font-weight: 500 !important;
+    line-height: normal !important;
+  }
 
-.dealimage {
-  height: 60%;
-}
+  .cardText {
+    color: lightcoral;
+    font-size: 0.3rem !important;
+  }
 
-.dealcontent {
-  height: 40%;
-}
+  .lowPad {
+    padding: 1px 3px !important;
+  }
 
-/* COLLAPSIBLE STYLES */
-.labelDiv {
-  width: 80%;
-}
+  .smallHide {
+    display: none;
+    width: 0px
+  }
 
-.collapseLabel {
-  font-size: 2rem;
-  margin: 0px;
-}
+  .dealcard {
+    height: 100px;
+  }
 
-/* MODAL STYLES */
-.modalContent h4 {
-  color: #5c5c6b;
-}
+  .dealimage {
+    height: 55%;
+  }
 
-.modalContent p {
-  margin-bottom: 0;
-  line-height: 1.5;
+  .dealcontent {
+    height: 45%;
+    line-height: 1px;
+    margin: 0px;
+  }
+
+  #deals span {
+    font-size: 0.7rem;
+    font-weight: 500;
+  }
+
+  .cardDescription {
+    font-size: 0.55rem;
+  }
+
+  /* COLLAPSIBLE STYLES */
+  .labelDiv {
+    width: 80%;
+  }
+
+  .collapseLabel {
+    font-size: 10px;
+    margin: 0px;
+    position: relative;;
+    left: 10px;
+  }
+
+  /* MODAL STYLES */
+  .modalContent h4 {
+    color: #5c5c6b;
+  }
+
+  .modalContent p {
+    margin-bottom: 0;
+    line-height: 1.5;
+  }
+
+  /* FOOTER STYLES */
+  .page-footer p {
+    font-size: 0.9rem;
+  }
+
+  .page-footer span, .page-footer a {
+    font-size: 0.8rem;
+  }
 }
