@@ -6,7 +6,7 @@
 
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen"/>
-      <link type="text/css" rel="stylesheet" href="css/index.css">
+      <link media="(min-width: 700px)" type="text/css" rel="stylesheet" href="css/index.css">
 
       <script defer src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       <script defer src="js/materialize.min.js"></script>
@@ -69,6 +69,9 @@
             </ul>
           </div>
           <div id="tabContent1" class="col s12">
+            <aside class="mapTitle">
+              <h3>Deals near you</h3>
+            </aside>
             <section id="mapContainer">
               <div id="map" class="z-depth-2">
               </div>
@@ -80,15 +83,6 @@
             </div>
           </div>
         </div>
-
-
-
-
-
-        <!-- <section id="mapContainer">
-          <div id="map" class="z-depth-2">
-          </div>
-        </section> -->
 
         <section id="collapsibles">
           <ul class="collapsible no-margin" data-collapsible="accordion">
@@ -146,8 +140,6 @@
             </li>
           </ul>
         </section>
-
-
       </main>
 
       <footer class="page-footer yellow accent-1" style="margin: 0px">
@@ -168,7 +160,7 @@
            </a>
            <div id="contact" class="modal">
             <div class="modal-content modalContent">
-              <h4>We'd love to hear from you</h4>
+              <h5>We'd love to hear from you</h5>
               <p>By phone: ###-###-####</p>
               <p>By email: minhchau@miser.com</p>
             </div>
