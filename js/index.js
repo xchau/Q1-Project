@@ -10,18 +10,67 @@
     $('.collapsible').collapsible();
   });
 
-  $(document).ready(function(){
+  $(document).ready(function() {
     $('.modal').modal();
   });
 
-  // MARKER & INFOWINDOW COMPONENTS
+  // CREATE DEAL CARD FUNCTION //
+  const createCard = function(deal) {
+    const $colDiv = $('<div>').addClass('col s3');
+    const $cardDiv = $('<div>').addClass('card dealcard');
+
+    const $cardImgDiv = $('<div>').addClass('card-image waves-effect waves-block waves-light dealimage');
+    const $cardImg = $('<img>').addClass('activator').prop('src', deal.image_url);
+
+    $cardImg.prop('onerror', 'this.src ="assets/404.jpg"');
+    $cardImg.appendTo($cardImgDiv);
+
+    const $cardContentDiv = $('<div>').addClass('card-content dealcontent lowPad row');
+    const $cardSpanOne = $('<span>').addClass('card-title activator grey-text text-darken-4 cardTitle');
+    $cardSpanOne.text(deal.short_title.toUpperCase());
+    const $vertIcon = $('<i>').addClass('material-icons activator hoverFinger right');
+    const $spacerOne = $('<div>').addClass('col s10 tbMargin');
+    const $spacerTwo = $('<div>').addClass('col s1 offset-s1');
+
+    $vertIcon.text('more_vert');
+    $vertIcon.appendTo($spacerTwo);
+    $cardSpanOne.appendTo($spacerOne);
+    $spacerOne.appendTo($cardContentDiv);
+    $spacerTwo.appendTo($cardContentDiv);
+
+    const $pOne = $('<p>').addClass('col s12');
+    const $cardLink = $('<a>').prop('href', deal.untracked_url);
+
+    $cardLink.addClass('cardText');
+    $cardLink.text(`Offered by ${deal.provider_name}`);
+    $cardLink.appendTo($pOne);
+    $pOne.appendTo($cardContentDiv);
+
+    const $cardRevealDiv = $('<div>').addClass('card-reveal');
+    const $cardSpanTwo = $('<span>').addClass('card-title grey-text text-darken-4');
+
+    $cardSpanTwo.text(deal.short_title);
+    $cardSpanTwo.appendTo($cardRevealDiv);
+
+    const $pTwo = $('<p>');
+
+    $pTwo.html(deal.description);
+    $pTwo.appendTo($cardRevealDiv);
+
+    $cardImgDiv.appendTo($cardDiv);
+    $cardContentDiv.appendTo($cardDiv);
+    $cardRevealDiv.appendTo($cardDiv);
+    $cardDiv.appendTo($colDiv);
+    $('#deals').append($colDiv);
+  };
+
+  // MARKER & INFOWINDOW COMPONENTS //
   const mapLabels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  let labelIndex = 0;
+  let locationNames = [];
+  let labelIndex;
+  let namesIndex;
 
-  const locationNames = [];
-  let namesIndex = 0;
-
-  // GENERATE GOOGLE MAP //
+  // GENERATE INITIAL GOOGLE MAP //
   const generateMap = function(arrayOfDeals, arrayOfCoordinates) {
     // console.log(arrayOfDeals);
     // console.log(arrayOfCoordinates);
@@ -34,6 +83,9 @@
       zoom: 12,
       center: current
     });
+
+    labelIndex = 0;
+    namesIndex = 0;
 
     for (let i = 0; i < arrayOfDeals.length; i++) {
       const contentString = '<div class="infoContainer">' + '<div><h2 class="infoTitle">' + arrayOfDeals[i].short_title + '</h2></div><div><a href="' + arrayOfDeals[i].untracked_url + '" class="infoLink" target="_blank">Offered by ' + arrayOfDeals[i].provider_name + '<span><i class="material-icons infoIcon">add_shopping_cart</i></span></a>' + '<span>|</span><a href="' + arrayOfDeals[i].merchant.url + '">' + arrayOfDeals[i].merchant.name + '<span><i class="material-icons infoIcon">domain</i></span></a></div><div class="infoDescription">' + arrayOfDeals[i].description + '</div></div>';
@@ -56,7 +108,7 @@
   };
 
   // MAKE INITIAL AJAX CALL //
-  const currentDeals = [];
+  let currentDeals = [];
 
   const $xhr = $.ajax({
     method: 'GET',
@@ -81,6 +133,7 @@
       };
 
       locationCoordinates.push(coord);
+      createCard(location.deal);
     }
     generateMap(currentDeals, locationCoordinates);
   });
@@ -89,36 +142,46 @@
     console.error(err);
   });
 
+  // SEARCH BAR REQUEST
+  const $search = $('#submitButton');
 
+  $search.on('click', (event) => {
+    event.preventDefault();
 
+    const $userQuery = $('#userQuery').val();
+    const $xhrSearch = $.ajax({
+      method: 'GET',
+      url: `https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events,retail-services&per_page=12&radius=10&location=47.598962,-122.333799&query=${$userQuery}`,
+      dataType: 'json'
+    });
 
+    $xhrSearch.done((data) => {
+      if ($xhrSearch.status !== 200) {
+        return;
+      }
 
-  // // SEARCH BAR REQUEST
-  // const $search = $('#submitButton');
-  //
-  // $search.on('click', (event) => {
-  //   event.preventDefault();
-  //
-  //   const $userQuery = $('#userQuery').val();
-  //   const $xhrSearch = $.ajax({
-  //     method: 'GET',
-  //     url: `https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events,retail-services&per_page=12&radius=10&location=47.598962,-122.333799&query=${$userQuery}`,
-  //     dataType: 'json'
-  //   });
-  //
-  //   $xhrSearch.done((data) => {
-  //     if ($xhrSearch.status !== 200) {
-  //       return;
-  //     }
-  //
-  //     $('#hotrow').empty();
-  //     for (const location of data.deals) {
-  //       createHotCard(location.deal);
-  //     }
-  //   });
-  //
-  //   $xhrSearch.fail((err) => {
-  //     console.error(err);
-  //   });
-  // });
+      const userLocationCoordinates = [];
+
+      currentDeals = [];
+      locationNames = [];
+
+      $('#deals').empty();
+      for (const location of data.deals) {
+        currentDeals.push(location.deal);
+        locationNames.push(location.deal.merchant.name);
+        const userCoord = {
+          lat: location.deal.merchant.latitude,
+          lng: location.deal.merchant.longitude
+        };
+
+        userLocationCoordinates.push(userCoord);
+        createCard(location.deal);
+      }
+      generateMap(currentDeals, userLocationCoordinates);
+    });
+
+    $xhrSearch.fail((err) => {
+      console.error(err);
+    });
+  });
 })();

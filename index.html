@@ -57,11 +57,38 @@
           </div>
         </header>
 
-        <section id="mapContainer">
-          <div id="map" class="z-depth-2">
-            <!--Map goes here-->
+        <div class="row">
+          <div class="col s12">
+            <ul class="tabs flexCenter" style="margin-top: 15px">
+              <li id="tab1" class="tab active">
+                <a href="#tabContent1">Map<i class="material-icons" style="margin-left: 5px; font-size: 15px">map</i></a>
+              </li>
+              <li id="tab2" class="tab">
+                <a href="#tabContent2">Deals<i class="material-icons" style="margin-left: 5px; font-size: 15px">local_offer</i></a>
+              </li>
+            </ul>
           </div>
-        </section>
+          <div id="tabContent1" class="col s12">
+            <section id="mapContainer">
+              <div id="map" class="z-depth-2">
+              </div>
+            </section>
+          </div>
+          <div id="tabContent2" class="col s12">
+            <div id="deals" class="row no-margin">
+
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+        <!-- <section id="mapContainer">
+          <div id="map" class="z-depth-2">
+          </div>
+        </section> -->
 
         <section id="collapsibles">
           <ul class="collapsible no-margin" data-collapsible="accordion">

@@ -29,9 +29,9 @@ body {
   justify-content: flex-end;
 }
 
-.flexed {
+.flexCenter {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
 }
 
 h4 {
@@ -79,13 +79,24 @@ h3 {
   box-shadow: 1px 1px 3px 1px #3c3a3b;
 }
 
+/* TAB STYLES */
+.tab a.active {
+  color: #ee6e73;
+  font-size: 1.3vw;
+  font-weight: 600;
+}
+
+.tab a {
+  font-size: 1.2 !important;
+}
+
 /* MAP SECTION */
 #mapContainer {
   background-color: white;
   /*background-color: #fffde7;*/
   margin: 0px;
   min-height: 20px;
-  padding: 40px 120px;
+  padding: 25px 110px 35px 110px;
   width: 100%;
 }
 
@@ -137,8 +148,8 @@ h3 {
 
 /* CARD STYLES */
 .cardTitle {
-  font-size: 18px !important;
-  font-weight: 700 !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
   line-height: normal !important;
 }
 

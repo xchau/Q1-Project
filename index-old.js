@@ -6,14 +6,14 @@
     $('.parallax').parallax();
   });
 
-  const createHotCard = function(deals) {
+  const createHotCard = function(deal) {
     // card element
     const $colDiv = $('<div>').addClass('col s3');
     const $cardDiv = $('<div>').addClass('card dealcard');
 
     // card image
     const $cardImgDiv = $('<div>').addClass('card-image waves-effect waves-block waves-light dealimage');
-    const $cardImg = $('<img>').addClass('activator').prop('src', deals.image_url);
+    const $cardImg = $('<img>').addClass('activator').prop('src', deal.image_url);
 
     $cardImg.prop('onerror', 'this.src ="assets/404.jpg"');
     $cardImg.appendTo($cardImgDiv);
@@ -21,7 +21,7 @@
     // card content
     const $cardContentDiv = $('<div>').addClass('card-content dealcontent lowPad row');
     const $cardSpanOne = $('<span>').addClass('card-title activator grey-text text-darken-4 cardTitle');
-    $cardSpanOne.text(deals.short_title.toUpperCase());
+    $cardSpanOne.text(deal.short_title.toUpperCase());
     const $vertIcon = $('<i>').addClass('material-icons activator hoverFinger right');
     const $spacerOne = $('<div>').addClass('col s10 tbMargin');
     const $spacerTwo = $('<div>').addClass('col s1 offset-s1');
@@ -33,10 +33,10 @@
     $spacerTwo.appendTo($cardContentDiv);
 
     const $pOne = $('<p>').addClass('col s12');
-    const $cardLink = $('<a>').prop('href', deals.untracked_url);
+    const $cardLink = $('<a>').prop('href', deal.untracked_url);
 
     $cardLink.addClass('cardText');
-    $cardLink.text(`Offered by ${deals.provider_name}`);
+    $cardLink.text(`Offered by ${deal.provider_name}`);
     $cardLink.appendTo($pOne);
     $pOne.appendTo($cardContentDiv);
 
@@ -44,12 +44,12 @@
     const $cardRevealDiv = $('<div>').addClass('card-reveal');
     const $cardSpanTwo = $('<span>').addClass('card-title grey-text text-darken-4');
 
-    $cardSpanTwo.text(deals.short_title);
+    $cardSpanTwo.text(deal.short_title);
     $cardSpanTwo.appendTo($cardRevealDiv);
 
     const $pTwo = $('<p>');
 
-    $pTwo.html(deals.description);
+    $pTwo.html(deal.description);
     $pTwo.appendTo($cardRevealDiv);
 
     // append to card element
@@ -57,7 +57,7 @@
     $cardContentDiv.appendTo($cardDiv);
     $cardRevealDiv.appendTo($cardDiv);
     $cardDiv.appendTo($colDiv);
-    $('#hotrow').append($colDiv);
+    $('#deals').append($colDiv);
   };
 
   // FILL contentStrings ARRAY FOR INFO WINDOW
