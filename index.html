@@ -29,7 +29,7 @@
 
       <main>
 
-        <header class="parallax-container heroHeader z-depth-1">
+        <header class="parallax-container heroHeader">
           <div class="section full-height">
             <br><br>
             <section class="heroSection z-depth-1">
@@ -58,39 +58,6 @@
             <img src="assets/coffee-shop.jpg" alt="coffee-shop">
           </div>
         </header>
-
-        <div class="row">
-          <div class="col s12">
-            <ul class="tabs flexCenter" style="margin-top: 15px">
-              <li id="tab1" class="tab tabDiv">
-                <a href="#tabContent1">Map<i class="material-icons" style="margin-left: 5px; font-size: 15px">map</i></a>
-              </li>
-              <li id="tab2" class="tab tabDiv">
-                <a href="#tabContent2">Deals<i class="material-icons" style="margin-left: 5px; font-size: 15px">local_offer</i></a>
-              </li>
-            </ul>
-          </div>
-          <div id="tabContent1" class="col s12">
-            <section id="mapContainer">
-              <div id="map" class="z-depth-2">
-                <a id="help" class="btn-floating btn-large waves-effect waves-light yellow lighten-3 tooltipped" data-position="top" data-delay="50" data-tooltip="Here are some awesome deals near you now"><i class="material-icons red-text text-lighten-2">help_outline</i></a>
-              </div>
-            </section>
-          </div>
-          <div id="tabContent2" class="col s12">
-            <div id="deals" class="row no-margin">
-
-            </div>
-            <div class="flexCenter">
-              <ul class="pagination">
-                <li class="active"><a id="page1" href="#!" class="page">1</a></li>
-                <li><a id="page2" href="#tab2" class="page">2</a></li>
-                <li><a id="page3" href="#tab2" class="page">3</a></li>
-                <li><a id="page4" href="#tab2" class="page">4</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
 
         <section id="collapsibles">
           <ul class="collapsible no-margin" data-collapsible="accordion">
@@ -148,6 +115,96 @@
             </li>
           </ul>
         </section>
+
+        <div class="row">
+          <div class="col s12">
+            <ul class="tabs flexCenter" style="margin-top: 15px">
+              <li id="tab1" class="tab tabDiv">
+                <a href="#tabContent1">Map<i class="material-icons" style="margin-left: 5px; font-size: 15px">map</i></a>
+              </li>
+              <li id="tab2" class="tab tabDiv">
+                <a href="#tabContent2">Deals<i class="material-icons" style="margin-left: 5px; font-size: 15px">local_offer</i></a>
+              </li>
+            </ul>
+          </div>
+          <div id="tabContent1" class="col s12">
+            <section id="mapContainer">
+              <div id="map" class="z-depth-2">
+                <a id="help" class="btn-floating btn-large waves-effect waves-light yellow lighten-3 tooltipped" data-position="top" data-delay="50" data-tooltip="Here are some awesome deals near you now"><i class="material-icons red-text text-lighten-2">help_outline</i></a>
+              </div>
+            </section>
+          </div>
+          <div id="tabContent2" class="col s12">
+            <div id="deals" class="row no-margin">
+
+            </div>
+            <div class="flexCenter">
+              <ul class="pagination">
+                <li class="active"><a id="page1" href="#!" class="page">1</a></li>
+                <li><a id="page2" href="#tab2" class="page">2</a></li>
+                <li><a id="page3" href="#tab2" class="page">3</a></li>
+                <li><a id="page4" href="#tab2" class="page">4</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- <section id="collapsibles">
+          <ul class="collapsible no-margin" data-collapsible="accordion">
+            <li>
+              <div class="collapsible-header row no-margin white red-text lighten-2 z-depth-2">
+                <div class="col s4 offset-s3 labelDiv">
+                  <p class="collapseLabel right-align">What is Miser™?</p>
+                </div>
+                <div class="col s2 offset-s3 toRight">
+                  <i class="material-icons right-align">keyboard_arrow_down</i>
+                </div>
+              </div>
+              <div class="collapsible-body">
+
+                <section id="firstDesc" class="miserDescription row">
+                  <div class="col s6 descCol yellow lighten-5" style="display: flex; justify-content: center; align-items: center;">
+                    <p class="descText center-align">
+                    Miser uses your geolocation to populate a Google Map of fantastic deals on dining, entertainment and retail services near you. Wherever life takes you, do it wiser, be a Miser.
+                    </p>
+                  </div>
+                  <div class="col s6 parallax-container descCol">
+                    <div class="parallax">
+                      <img src="assets/travel-1.jpeg" alt="travel" class="descImg">
+                    </div>
+                  </div>
+                </section>
+
+                <section id="secondDesc" class="miserDescription row">
+                  <div class="col s6 parallax-container descCol">
+                    <div class="parallax">
+                      <img src="assets/eating-1.jpeg" alt="restaurant" class="descImg">
+                    </div>
+                  </div>
+                  <div class="col s6 descCol yellow lighten-5" style="display: flex; justify-content: center; align-items: center;">
+                    <p class="descText center-align">
+                      Whether you're looking for something sweet or savory, Miser can help. Type a keyword into the search field above to get started. Check out what deals are waiting for you now! Results are available in both map and card view.
+                    </p>
+                  </div>
+                </section>
+
+                <section id="thirdDesc" class="miserDescription row">
+                  <div class="col s6 descCol yellow lighten-5" style="display: flex; justify-content: center; align-items: center;">
+                    <p class="descText center-align">
+                      Try a broader keyword search if you're having trouble finding what you're looking for. For example, search for "concert" rather than "The Beatles". Feel free to <a class="red-text text-lighten-2" href="#contact">contact us</a> and tell us what you think!
+                    </p>
+                  </div>
+                  <div class="col s6 parallax-container descCol">
+                    <div class="parallax">
+                      <img src="assets/concert.jpg" alt="concert" class="descImg">
+                    </div>
+                  </div>
+                </section>
+
+              </div>
+            </li>
+          </ul>
+        </section> -->
       </main>
 
       <footer class="page-footer yellow accent-1" style="margin: 0px">
