@@ -90,7 +90,13 @@
     const $cardDiv = $('<div>').addClass('card dealcard');
 
     const $cardImgDiv = $('<div>').addClass('card-image waves-effect waves-block waves-light dealimage');
-    const $cardImg = $('<img>').addClass('activator').prop('src', deal.image_url);
+
+    if (!deal.image_url) {
+      const $cardImg = $('<img>').addClass('activator').prop('src', 'assets/404.jpg');
+    }
+    else {
+      const $cardImg = $('<img>').addClass('activator').prop('src', deal.image_url);
+    }
 
     $cardImg.prop('onerror', 'this.src ="assets/404.jpg"');
     $cardImg.appendTo($cardImgDiv);
