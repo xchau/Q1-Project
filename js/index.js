@@ -111,7 +111,7 @@
     const $pOne = $('<p>').addClass('col s12');
     const $cardLink = $('<a>').prop('href', deal.untracked_url);
 
-    $cardLink.addClass('cardText');
+    $cardLink.addClass('cardText').prop('target', '_blank');
     $cardLink.text(`Offered by ${deal.provider_name}`);
     $cardLink.appendTo($pOne);
     $pOne.appendTo($cardContentDiv);
@@ -151,7 +151,7 @@
     namesIndex = 0;
 
     for (let i = 0; i < arrayOfDeals.length; i++) {
-      const contentString = '<div class="infoContainer">' + '<div><h2 class="infoTitle">' + arrayOfDeals[i].short_title + '</h2></div><div"><a href="' + arrayOfDeals[i].untracked_url + '" class="infoLink" target="_blank">Offered by ' + arrayOfDeals[i].provider_name + '<span><i class="material-icons infoIcon">add_shopping_cart</i></span></a>' + '<span>|</span><a href="' + arrayOfDeals[i].merchant.url + '">' + arrayOfDeals[i].merchant.name + '<span><i class="material-icons infoIcon">domain</i></span></a></div><div class="infoDescription">' + arrayOfDeals[i].description + '</div></div>';
+      const contentString = '<div class="infoContainer">' + '<div><h2 class="infoTitle">' + arrayOfDeals[i].short_title + '</h2></div><div"><a href="' + arrayOfDeals[i].untracked_url + '" class="infoLink" target="_blank">Offered by ' + arrayOfDeals[i].provider_name + '<span><i class="material-icons infoIcon">add_shopping_cart</i></span></a>' + '<span>|</span><a href="' + arrayOfDeals[i].merchant.url + '" target="_blank">' + arrayOfDeals[i].merchant.name + '<span><i class="material-icons infoIcon">domain</i></span></a></div><div class="infoDescription">' + arrayOfDeals[i].description + '</div></div>';
 
       const infowindow = new google.maps.InfoWindow({
         content: contentString
@@ -182,7 +182,7 @@
 
   const displayNumResults = function(numberOfResults) {
     if (numberOfResults) {
-      Materialize.toast(`${numberOfResults} results found!`, 4000);
+      Materialize.toast(`${numberOfResults} results found!`, 6000);
     }
   };
 
@@ -235,7 +235,7 @@
         }
       }
       else {
-        Materialize.toast('Sorry. No results found.', 4000);
+        Materialize.toast('Sorry. No results found.', 6000);
       }
 
       const numResults = currentDeals.length;
@@ -368,7 +368,7 @@
       }
     }
     else {
-      Materialize.toast('Sorry. No results found.', 4000);
+      Materialize.toast('Sorry. No results found.', 6000);
     }
   });
 })();
