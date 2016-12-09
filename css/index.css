@@ -4,7 +4,7 @@ html {
 
 @font-face {
   font-family: 'Josefin Sans';
-  src: url(fonts/Josefin_Sans/JosefinSans-Regular.ttf) format('truetype');
+  src: url(fonts/Josefin_Sans) format('truetype');
 }
 
 body {
