@@ -18,9 +18,9 @@
     $('.tooltipped').tooltip({delay: 50});
   });
 
-  // let notVisited = JSON.parse(localStorage.getItem('notVisited')) || true;
-  localStorage.removeItem('notVisited');
-  localStorage.setItem('notVisited', JSON.stringify(true));
+  let notVisited = JSON.parse(localStorage.getItem('notVisited')) || true;
+  // localStorage.removeItem('notVisited');
+  // localStorage.setItem('notVisited', JSON.stringify(true));
 
   if (notVisited) {
     localStorage.setItem('notVisited', JSON.stringify(false));
@@ -43,8 +43,14 @@
   //   console.warn(`ERROR (${err.code}): ` + err.message);
   // }
   //
-  // navigator.geolocation.getCurrentPosition(geoSuccess, geoFailure);
-  // localStorage.setItem('userCoord', JSON.stringify(userCoord));
+  //
+  // const wrapLocation = function(cb) {
+  //
+  //   navigator.geolocation.getCurrentPosition((pos) => {
+  //     cb(pos)
+  //
+  //   }), geoFailure);
+  // });
 
   // CREATE DEAL CARD FUNCTION //
   const createCard = function(deal) {
@@ -174,13 +180,14 @@
     console.error(err);
   });
 
-  // SEARCH BAR REQUEST
+  // SEARCH BAR REQUEST //
   const $search = $('#submitButton');
 
   $search.on('click', (event) => {
     event.preventDefault();
 
     const $userQuery = $('#userQuery').val();
+    // const ajaxURL = ;
     const $xhrSearch = $.ajax({
       method: 'GET',
       url: `https://api.sqoot.com/v2/deals?api_key=9oll4i&category_slugs=dining-nightlife,activities-events,retail-services&per_page=12&radius=10&location=47.598962,-122.333799&query=${$userQuery}`,
@@ -215,5 +222,63 @@
     $xhrSearch.fail((err) => {
       console.error(err);
     });
+  });
+
+  // PAGINATION REQUESTS //
+  const pageAjax = function(userQuery, page) {
+    let ajaxURL;
+
+    if (userQuery) {
+      ajaxURL = `https://api.sqoot.com/v2/deals?api_key=9oll4i&category_slugs=dining-nightlife,activities-events,retail-services&per_page=12&page=${page}&radius=10&location=47.598962,-122.333799&query=${userQuery}`;
+    }
+    else {
+      ajaxURL = `https://api.sqoot.com/v2/deals?api_key=9oll4i&category_slugs=dining-nightlife,activities-events,retail-services&per_page=12&page=${page}&radius=10&location=47.598962,-122.333799`;
+    }
+
+    const $xhrPage = $.ajax({
+      method: 'GET',
+      url: ajaxURL,
+      dataType: 'json'
+    });
+
+    $xhrPage.done((data) => {
+      if ($xhrPage.status !== 200) {
+        return;
+      }
+
+      const userLocationCoordinates = [];
+
+      currentDeals = [];
+      locationNames = [];
+
+      $('#deals').empty();
+      for (const location of data.deals) {
+        currentDeals.push(location.deal);
+        locationNames.push(location.deal.merchant.name);
+        const userCoord = {
+          lat: location.deal.merchant.latitude,
+          lng: location.deal.merchant.longitude
+        };
+
+        userLocationCoordinates.push(userCoord);
+        createCard(location.deal);
+      }
+      generateMap(currentDeals, userLocationCoordinates);
+    })
+  };
+
+  let currentPageID = 'page1';
+
+  $('.page').on('click', (event) => {
+    const $target = $(event.target);
+    const $userQuery = $('#userQuery').val();
+    const pageNumber = $target.text();
+
+    $(`#${currentPageID}`).parent().removeClass('active');
+
+    $target.parent().addClass('active');
+    currentPageID = $target.prop('id');
+
+    pageAjax($userQuery, pageNumber);
   });
 })();
