@@ -18,39 +18,71 @@
     $('.tooltipped').tooltip({delay: 50});
   });
 
-  let notVisited = JSON.parse(localStorage.getItem('notVisited')) || true;
+  const notVisited = JSON.parse(localStorage.getItem('notVisited')) || true;
   // localStorage.removeItem('notVisited');
   // localStorage.setItem('notVisited', JSON.stringify(true));
 
   if (notVisited) {
     localStorage.setItem('notVisited', JSON.stringify(false));
-
-    $('#help').addClass('hideToast');
   }
   else {
-    return;
+    $('#help').addClass('hideHelp');
   }
 
-  BROWSER GEOLOCATION //
-  const userCoord = {};
+  // MAKE INITIAL AJAX CALL //
+  let currentDeals = [];
+  const userPosition = {};
 
-  const geoSuccess = function(pos) {
-    userCoord.lat = pos.coords.latitude;
-    userCoord.lng = pos.coords.longitude;
-  };
+  const makeInitialCall = function(posInfo) {
+    userPosition.lat = posInfo.coords.latitude;
+    userPosition.lng = posInfo.coords.longitude;
 
+    const $xhr = $.ajax({
+      method: 'GET',
+      url: `https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events,retail-services&per_page=12&radius=20&location=${userPosition.lat},${userPosition.lng}`,
+      dataType: 'json'
+    });
+
+    $xhr.done((data) => {
+      if ($xhr.status !== 200) {
+        return;
+      }
+
+      const locationCoordinates = [];
+
+      for (const location of data.deals) {
+        currentDeals.push(location.deal);
+        locationNames.push(location.deal.merchant.name);
+
+        const coord = {
+          lat: location.deal.merchant.latitude,
+          lng: location.deal.merchant.longitude
+        };
+
+        locationCoordinates.push(coord);
+        createCard(location.deal);
+      }
+
+      generateMap(currentDeals, locationCoordinates);
+    });
+
+    $xhr.fail((err) => {
+      console.error(err);
+    });
+  }
+
+  // BROWSER GEOLOCATION //
   const geoFailure = function(err) {
     console.warn(`ERROR (${err.code}): ` + err.message);
   }
 
-  navigator.geolocation.getCurrentPosition(geoSuccess, geoFailure);
-
   const wrapLocation = function(cb) {
-
     navigator.geolocation.getCurrentPosition((pos) => {
       cb(pos);
-    }), geoFailure);
-  });
+    }, geoFailure);
+  };
+
+  wrapLocation(makeInitialCall)
 
   // CREATE DEAL CARD FUNCTION //
   const createCard = function(deal) {
@@ -108,18 +140,11 @@
   let labelIndex;
   let namesIndex;
 
-  // GENERATE INITIAL GOOGLE MAP //
+  // POPULATE GOOGLE MAP //
   const generateMap = function(arrayOfDeals, arrayOfCoordinates) {
-    // console.log(arrayOfDeals);
-    // console.log(arrayOfCoordinates);
-    const current = {
-      lat: 47.598962,
-      lng: -122.333799
-    };
-
     const map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 12,
-      center: current
+      zoom: 11,
+      center: userPosition
     });
 
     labelIndex = 0;
@@ -143,54 +168,39 @@
         infowindow.open(map, marker);
       });
     }
+
+    const user = new google.maps.Marker({
+      position: userPosition,
+      icon: {
+        path: google.maps.SymbolPath.CIRCLE,
+        scale: 6
+      },
+      draggable: false,
+      map: map
+    });
   };
 
-  // MAKE INITIAL AJAX CALL //
-  let currentDeals = [];
-
-  const $xhr = $.ajax({
-    method: 'GET',
-    url: 'https://api.sqoot.com/v2/deals?api_key=9oll4i&category_slugs=dining-nightlife,activities-events,retail-services&per_page=12&radius=10&location=47.598962,-122.333799',
-    dataType: 'json'
-  });
-
-  $xhr.done((data) => {
-    if ($xhr.status !== 200) {
-      return;
+  const displayNumResults = function(numberOfResults) {
+    if (numberOfResults) {
+      Materialize.toast(`${numberOfResults} results found!`, 4000);
     }
-
-    const locationCoordinates = [];
-
-    for (const location of data.deals) {
-      currentDeals.push(location.deal);
-      locationNames.push(location.deal.merchant.name);
-
-      const coord = {
-        lat: location.deal.merchant.latitude,
-        lng: location.deal.merchant.longitude
-      };
-
-      locationCoordinates.push(coord);
-      createCard(location.deal);
-    }
-    generateMap(currentDeals, locationCoordinates);
-  });
-
-  $xhr.fail((err) => {
-    console.error(err);
-  });
+  };
 
   // SEARCH BAR REQUEST //
+  let queryLocationCoordinates;
   const $search = $('#submitButton');
 
   $search.on('click', (event) => {
     event.preventDefault();
+    $('#page1').parent().addClass('active');
+    $(`#${currentPageID}`).parent().removeClass('active');
+
 
     const $userQuery = $('#userQuery').val();
 
     const $xhrSearch = $.ajax({
       method: 'GET',
-      url: `https://api.sqoot.com/v2/deals?api_key=9oll4i&category_slugs=dining-nightlife,activities-events,retail-services&per_page=12&radius=10&location=47.598962,-122.333799&query=${$userQuery}`,
+      url: `https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events,retail-services&per_page=50&radius=20&location=${userPosition.lat},${userPosition.lng}&query=${$userQuery}`,
       dataType: 'json'
     });
 
@@ -201,24 +211,37 @@
 
       currentDeals = [];
       locationNames = [];
+      queryLocationCoordinates = [];
 
-      const userLocationCoordinates = [];
+      const location = data.deals;
 
       $('#deals').empty();
 
-      for (const location of data.deals) {
-        currentDeals.push(location.deal);
-        locationNames.push(location.deal.merchant.name);
+      for (let i = 0; i < location.length; i++) {
+        currentDeals.push(location[i].deal);
+        locationNames.push(location[i].deal.merchant.name);
 
         const userCoord = {
-          lat: location.deal.merchant.latitude,
-          lng: location.deal.merchant.longitude
+          lat: location[i].deal.merchant.latitude,
+          lng: location[i].deal.merchant.longitude
         };
 
-        userLocationCoordinates.push(userCoord);
-        createCard(location.deal);
+        queryLocationCoordinates.push(userCoord);
       }
-      generateMap(currentDeals, userLocationCoordinates);
+
+      if (currentDeals.length) {
+        for (let j = 0; j < 12; j++) {
+          createCard(currentDeals[j]);
+        }
+      }
+      else {
+        Materialize.toast('Sorry. No results found.', 4000);
+      }
+
+      const numResults = currentDeals.length;
+
+      displayNumResults(numResults);
+      generateMap(currentDeals.slice(0, 12), queryLocationCoordinates.slice(0, 12));
     });
 
     $xhrSearch.fail((err) => {
@@ -227,60 +250,126 @@
   });
 
   // PAGINATION REQUESTS //
-  const pageAjax = function(userQuery, page) {
-    let ajaxURL;
-
-    if (userQuery) {
-      ajaxURL = `https://api.sqoot.com/v2/deals?api_key=9oll4i&category_slugs=dining-nightlife,activities-events,retail-services&per_page=12&page=${page}&radius=10&location=47.598962,-122.333799&query=${userQuery}`;
-    }
-    else {
-      ajaxURL = `https://api.sqoot.com/v2/deals?api_key=9oll4i&category_slugs=dining-nightlife,activities-events,retail-services&per_page=12&page=${page}&radius=10&location=47.598962,-122.333799`;
-    }
-
-    const $xhrPage = $.ajax({
-      method: 'GET',
-      url: ajaxURL,
-      dataType: 'json'
-    });
-
-    $xhrPage.done((data) => {
-      if ($xhrPage.status !== 200) {
-        return;
-      }
-
-      const userLocationCoordinates = [];
-
-      currentDeals = [];
-      locationNames = [];
-
-      $('#deals').empty();
-      for (const location of data.deals) {
-        currentDeals.push(location.deal);
-        locationNames.push(location.deal.merchant.name);
-        const userCoord = {
-          lat: location.deal.merchant.latitude,
-          lng: location.deal.merchant.longitude
-        };
-
-        userLocationCoordinates.push(userCoord);
-        createCard(location.deal);
-      }
-      generateMap(currentDeals, userLocationCoordinates);
-    });
-  };
-
+  // const pageAjax = function(userQuery) {
+  //   let ajaxURL;
+  //
+  //   if (userQuery) {
+  //     ajaxURL = `https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events,retail-services&per_page=12&radius=20&location=${userPosition.lat},${userPosition.lng}&query=${userQuery}`;
+  //   }
+  //   else {
+  //     ajaxURL = `https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events,retail-services&per_page=12&radius=20&location=${userPosition.lat},${userPosition.lng}`;
+  //   }
+  //
+  //   const $xhrPage = $.ajax({
+  //     method: 'GET',
+  //     url: ajaxURL,
+  //     dataType: 'json'
+  //   });
+  //
+  //   $xhrPage.done((data) => {
+  //     if ($xhrPage.status !== 200) {
+  //       return;
+  //     }
+  //
+  //     const queryLocationCoordinates = [];
+  //
+  //     currentDeals = [];
+  //     locationNames = [];
+  //
+  //     $('#deals').empty();
+  //
+  //     for (let i = 0; i < location.length; i++) {
+  //       currentDeals.push(location[i].deal);
+  //       locationNames.push(location[i].deal.merchant.name);
+  //
+  //       const userCoord = {
+  //         lat: location[i].deal.merchant.latitude,
+  //         lng: location[i].deal.merchant.longitude
+  //       };
+  //
+  //       queryLocationCoordinates.push(userCoord);
+  //     }
+  //   });
+  // };
   let currentPageID = 'page1';
 
   $('.page').on('click', (event) => {
     const $target = $(event.target);
-    const $userQuery = $('#userQuery').val();
-    const pageNumber = $target.text();
 
     $(`#${currentPageID}`).parent().removeClass('active');
-
     $target.parent().addClass('active');
     currentPageID = $target.prop('id');
 
-    pageAjax($userQuery, pageNumber);
+    if (currentDeals.length < 13) {
+      $('#deals').empty();
+      $('page2').parent().addClass('disabled');
+      $('page3').parent().addClass('disabled');
+      $('page4').parent().addClass('disabled');
+      switch (currentPageID) {
+        case 'page1':
+          generateMap(currentDeals.slice(0, 12), queryLocationCoordinates.slice(0, 12));
+          for (let j = 0; j < 12; j++) {
+            createCard(currentDeals[j]);
+          }
+          break;
+        default:
+          return;
+      }
+    }
+    else if (currentDeals.length < 26) {
+      $('#deals').empty();
+      $('page3').parent().addClass('disabled');
+      $('page4').parent().addClass('disabled');
+      switch (currentPageID) {
+        case 'page1':
+          generateMap(currentDeals.slice(0, 12), queryLocationCoordinates.slice(0, 12));
+          for (let j = 0; j < 12; j++) {
+            createCard(currentDeals[j]);
+          }
+          break;
+        case 'page2':
+          generateMap(currentDeals.slice(13, 25), queryLocationCoordinates.slice(13, 25));
+          for (let j = 13; j < 25; j++) {
+            createCard(currentDeals[j]);
+          }
+          break;
+        default:
+          return;
+      }
+    }
+    else if (currentDeals.length >= 26) {
+      $('#deals').empty();
+      switch (currentPageID) {
+        case 'page1':
+          generateMap(currentDeals.slice(0, 12), queryLocationCoordinates.slice(0, 12));
+          for (let j = 0; j < 12; j++) {
+            createCard(currentDeals[j]);
+          }
+          break;
+        case 'page2':
+          generateMap(currentDeals.slice(13, 25), queryLocationCoordinates.slice(13, 25));
+          for (let j = 13; j < 25; j++) {
+            createCard(currentDeals[j]);
+          }
+          break;
+        case 'page3':
+          generateMap(currentDeals.slice(26, 38), queryLocationCoordinates.slice(26, 38));
+          for (let j = 26; j < 38; j++) {
+            createCard(currentDeals[j]);
+          }
+          break;
+        case 'page4':
+          generateMap(currentDeals.slice(39, 50), queryLocationCoordinates.slice(39, 50));
+          for (let j = 39; j < 50; j++) {
+            createCard(currentDeals[j]);
+          }
+          break;
+        default:
+          return;
+      }
+    }
+    else {
+      Materialize.toast('Sorry. No results found.', 4000);
+    }
   });
 })();

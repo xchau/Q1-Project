@@ -192,6 +192,9 @@
 
   $search.on('click', (event) => {
     event.preventDefault();
+    $('#page1').parent().addClass('active');
+    $(`#${currentPageID}`).parent().removeClass('active');
+
 
     const $userQuery = $('#userQuery').val();
 
@@ -297,7 +300,44 @@
     $target.parent().addClass('active');
     currentPageID = $target.prop('id');
 
-    if (currentDeals.length) {
+    if (currentDeals.length < 13) {
+      $('#deals').empty();
+      $('page2').parent().addClass('disabled');
+      $('page3').parent().addClass('disabled');
+      $('page4').parent().addClass('disabled');
+      switch (currentPageID) {
+        case 'page1':
+          generateMap(currentDeals.slice(0, 12), queryLocationCoordinates.slice(0, 12));
+          for (let j = 0; j < 12; j++) {
+            createCard(currentDeals[j]);
+          }
+          break;
+        default:
+          return;
+      }
+    }
+    else if (currentDeals.length < 26) {
+      $('#deals').empty();
+      $('page3').parent().addClass('disabled');
+      $('page4').parent().addClass('disabled');
+      switch (currentPageID) {
+        case 'page1':
+          generateMap(currentDeals.slice(0, 12), queryLocationCoordinates.slice(0, 12));
+          for (let j = 0; j < 12; j++) {
+            createCard(currentDeals[j]);
+          }
+          break;
+        case 'page2':
+          generateMap(currentDeals.slice(13, 25), queryLocationCoordinates.slice(13, 25));
+          for (let j = 13; j < 25; j++) {
+            createCard(currentDeals[j]);
+          }
+          break;
+        default:
+          return;
+      }
+    }
+    else if (currentDeals.length >= 26) {
       $('#deals').empty();
       switch (currentPageID) {
         case 'page1':

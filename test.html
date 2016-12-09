@@ -1,192 +1,181 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta charset="utf-8">
+  <html>
+    <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <meta charset="utf-8">
 
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen"/>
-    <link type="text/css" rel="stylesheet" href="css/index.css">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen"/>
+      <link type="text/css" rel="stylesheet" href="css/index.css">
 
-    <script defer src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script defer src="js/materialize.min.js"></script>
-    <!-- <script defer src="js/index.js"></script> -->
-    <title>Test</title>
-  </head>
-  <body>
 
-    <div id="hotrow1" class="row no-margin">
-      <div class="col s2">
-        <div class="card dealcard">
-          <div class="card-image waves-effect waves-block waves-light dealimage">
-            <img class="activator" src="https://api.sqoot.com/v2/deals/4796196/image?api_key=s3btbi" onerror="this.src='assets/404.jpg'">
-          </div>
-          <div class="card-content dealcontent row">
+      <script defer src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script defer src="js/materialize.min.js"></script>
+      <script async defer  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDe3s-A5dg6QWWI16Sd11C3_JtuoYavrys">
+      </script>
+      <script defer src="js/index.js"></script>
+      <title>Miser</title>
+    </head>
 
-            <div class="col s10">
-              <span class="card-title activator grey-text text-darken-4 cardTitle">
-                14% OFF AT HOMEGROWN SUSTAINABLE SANDWICH SHOP
-              </span>
+    <body>
+
+      <nav>
+        <div class="nav-wrapper yellow accent-1">
+          <a href="#" class="brand-logo center">
+            <img class="logo" src="assets/logo-v2.png" alt="logo">
+          </a>
+        </div>
+      </nav>
+
+      <main>
+
+        <header class="parallax-container heroHeader z-depth-1">
+          <div class="section full-height">
+            <br><br>
+            <section class="heroSection z-depth-1">
+              <h3 class="yellow-text text-lighten-2 center container lrPadded">
+              Live a full life without spending full price
+              </h3>
+              <p class="shortHeroDesc red-text text-lighten-2">Search for bargains around your current location</p>
+            </section>
+            <div class="container fullHeight">
+              <div class="row center">
+                <form class="container">
+                  <div class="input-field">
+                    <input id="userQuery" type="search" placeholder="Enter a search term" required>
+                    <label for="userQuery" class="buttonCol">
+                      <i class="material-icons yellow-text">search</i>
+                    </label>
+                  </div>
+                  <button id="submitButton" class="btn waves-effect waves-light red lighten-2" type="submit" name="action">
+                    <i class="material-icons center-align">send</i>
+                  </button>
+                </form>
+              </div>
             </div>
-            <div class="col s1">
-              <i class="material-icons right">more_vert</i>
-            </div>
-            <p class="col 12"><a href="#" class="cardText">This is a really long link for testing</a></p>
           </div>
-          <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4 cardTitle">14% OFF AT HOMEGROWN SUSTAINABLE SANDWICH SHOP<i class="material-icons right">close</i></span>
-            <p class="cardText">Here is some more information about this product that is only revealed once clicked on.</p>
+          <div class="col s8 offset-s2 center parallax">
+            <img src="assets/coffee-shop.jpg" alt="coffee-shop">
+          </div>
+        </header>
+
+        <div class="row">
+          <div class="col s12">
+            <ul class="tabs flexCenter" style="margin-top: 15px">
+              <li id="tab1" class="tab tabDiv">
+                <a href="#tabContent1">Map<i class="material-icons" style="margin-left: 5px; font-size: 15px">map</i></a>
+              </li>
+              <li id="tab2" class="tab tabDiv">
+                <a href="#tabContent2">Deals<i class="material-icons" style="margin-left: 5px; font-size: 15px">local_offer</i></a>
+              </li>
+            </ul>
+          </div>
+          <div id="tabContent1" class="col s12">
+            <section id="mapContainer">
+              <div id="map" class="z-depth-2">
+                <a id="help" class="btn-floating btn-large waves-effect waves-light yellow lighten-3 tooltipped" data-position="top" data-delay="50" data-tooltip="Here are some awesome deals near you now"><i class="material-icons red-text text-lighten-2">help_outline</i></a>
+              </div>
+            </section>
+          </div>
+          <div id="tabContent2" class="col s12">
+            <div id="deals" class="row no-margin">
+
+            </div>
+            <div class="flexCenter">
+              <ul class="pagination">
+                <li class="active"><a id="page1" href="#!" class="page">1</a></li>
+                <li><a id="page2" href="#tab2" class="page">2</a></li>
+                <li><a id="page3" href="#tab2" class="page">3</a></li>
+                <li><a id="page4" href="#tab2" class="page">4</a></li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <section id="collapsibles">
-      <ul class="collapsible no-margin" data-collapsible="accordion">
-        <!-- FOOD TAB -->
-        <li>
-          <div class="collapsible-header blue lighten-3 row no-margin">
-            <div class="col s3 offset-s5">
-              <i id="food-tab" class="material-icons">
-                local_pizza
-              </i>
-              Food & Drink
-            </div>
-            <div class="col s1 offset-s3 toRight">
-              <i class="material-icons right-align">keyboard_arrow_down</i>
-            </div>
-          </div>
-
-          <div class="collapsible-body">
-            <!---->
-            <div class="row">
-
-              <div class="col s3">
-                <div class="card small">
-                  <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="http://www.michellefung.net/photos/references/totoro.jpg" alt="totoro">
-                  </div>
-                  <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
-                    <p><a href="#">This is a link</a></p>
-                  </div>
-                  <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                  </div>
+        <section id="collapsibles">
+          <ul class="collapsible no-margin" data-collapsible="accordion">
+            <li>
+              <div class="collapsible-header row no-margin white red-text lighten-2 z-depth-2">
+                <div class="col s4 offset-s3 labelDiv">
+                  <p class="collapseLabel right-align">What is Miser™?</p>
+                </div>
+                <div class="col s2 offset-s3 toRight">
+                  <i class="material-icons right-align">keyboard_arrow_down</i>
                 </div>
               </div>
+              <div class="collapsible-body">
 
-              <!-- <div class="col s3">
-                <div class="card small">
-                  <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="http://www.michellefung.net/photos/references/totoro.jpg" alt="totoro">
+                <section id="firstDesc" class="miserDescription row">
+                  <div class="col s6 descCol yellow lighten-5" style="display: flex; justify-content: center; align-items: center;">
+                    <p class="descText center-align">
+                    Miser uses your geolocation to populate a Google Map of fantastic deals on dining, entertainment and retail services near you. Wherever life takes you, do it wiser, be a Miser.
+                    </p>
                   </div>
-                  <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
-                    <p><a href="#">This is a link</a></p>
+                  <div class="col s6 parallax-container descCol">
+                    <div class="parallax">
+                      <img src="assets/travel-1.jpeg" alt="travel" class="descImg">
+                    </div>
                   </div>
-                  <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                </section>
+
+                <section id="secondDesc" class="miserDescription row">
+                  <div class="col s6 parallax-container descCol">
+                    <div class="parallax">
+                      <img src="assets/eating-1.jpeg" alt="restaurant" class="descImg">
+                    </div>
                   </div>
-                </div>
+                  <div class="col s6 descCol yellow lighten-5" style="display: flex; justify-content: center; align-items: center;">
+                    <p class="descText center-align">
+                      Whether you're looking for something sweet or savory, Miser can help. Type a keyword into the search field above to get started. Check out what deals are waiting for you now!
+                    </p>
+                  </div>
+                </section>
+
+                <section id="thirdDesc" class="miserDescription row">
+                  <div class="col s6 descCol yellow lighten-5" style="display: flex; justify-content: center; align-items: center;">
+                    <p class="descText center-align">
+                      For more information, consider checking out our Miser deal cards found in the Deals section. Click on the the cards to reveal more detailed information.
+                    </p>
+                  </div>
+                  <div class="col s6 parallax-container descCol">
+                    <div class="parallax">
+                      <img src="assets/concert.jpg" alt="concert" class="descImg">
+                    </div>
+                  </div>
+                </section>
+
               </div>
+            </li>
+          </ul>
+        </section>
+      </main>
 
-              <div class="col s3">
-                <div class="card small">
-                  <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="http://www.michellefung.net/photos/references/totoro.jpg" alt="totoro">
-                  </div>
-                  <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4">
-                      Card Title
-                      <i class="material-icons right">more_vert</i>
-                    </span>
-                    <p><a href="#">This is a link</a></p>
-                  </div>
-                  <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">
-                      Card Title
-                      <i class="material-icons right">close</i>
-                    </span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                  </div>
-                </div>
-              </div>
+      <footer class="page-footer yellow accent-1" style="margin: 0px">
+         <div class="container">
+           <div class="row">
+             <div class="col l6 s12">
+               <h5 class="blue-grey-text">Miser™</h5>
+               <p class="grey-text blue-grey-text">Power by Sqoot API</p>
+             </div>
 
-              <div class="col s3">
-                <div class="card small">
-                  <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="http://www.michellefung.net/photos/references/totoro.jpg" alt="totoro">
-                  </div>
-                  <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4">
-                      Card Title
-                      <i class="material-icons right">more_vert</i>
-                    </span>
-                    <p><a href="#">This is a link</a></p>
-                  </div>
-                  <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">
-                      Card Title
-                      <i class="material-icons right">close</i>
-                    </span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                  </div>
-                </div>
-              </div> -->
+           </div>
+         </div>
+         <div class="footer-copyright">
+           <div class="container blue-grey-text">
+           <span>© 2016 Galvanize Q1 Project</span>
+           <a class="blue-grey-text text-darken-1 right" href="#contact">
+             Contact Us
+           </a>
+           <div id="contact" class="modal">
+            <div class="modal-content modalContent">
+              <h5>We'd love to hear from you</h5>
+              <p>By phone: ###-###-####</p>
+              <p>By email: minhchau@miser.com</p>
             </div>
           </div>
-        </li>
-        <!-- ACTIVITES & ENTERTAINMETN TAB -->
-        <li>
-          <div class="collapsible-header row no-margin">
-            <div class="col s3 offset-s5">
-              <i id="activities-tab" class="material-icons">rowing</i>
-              Activities & Entertainment
-            </div>
-            <div class="col s1 offset-s3 toRight">
-              <i class="material-icons right-align">keyboard_arrow_down</i>
-            </div>
-          </div>
-          <div class="collapsible-body">
-            <p>Lorem ipsum dolor sit amet.</p>
-          </div>
-        </li>
+           </div>
+         </div>
+       </footer>
 
-        <!-- SHOPPING & RETAIL TAB -->
-        <li>
-          <div class="collapsible-header row no-margin">
-            <div class="col s3 offset-s5">
-              <i class="material-icons">local_offer</i>
-              Shopping & Retail
-            </div>
-            <div class="col s1 offset-s3 toRight">
-              <i class="material-icons right-align">keyboard_arrow_down</i>
-            </div>
-          </div>
-          <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-        </li>
-      </ul>
-    </section>
-
-    <div class="container fullHeight">
-      <div class="row center">
-        <form class="container">
-          <div class="input-field">
-
-            <input id="userQuery" type="search" required>
-            <label for="userQuery">
-              <i class="material-icons yellow-text">search</i>
-            </label>
-            <button id="submitButton" class="btn waves-effect waves-light" type="submit" name="action">Submit
-              <i class="material-icons right">send</i>
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-
-  </body>
-</html>
+    </body>
+  </html>

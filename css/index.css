@@ -79,7 +79,7 @@ main {
 }
 
 
-@media (min-width: 700px) {
+@media (min-width: 800px) {
 
   h5 {
    font-size: 1.5rem;
@@ -107,17 +107,23 @@ main {
   }
 
   .heroHeader {
-    height: 25vw;
+    height: 27vw;
   }
 
   .heroSection {
     align-items: center;
     background-color: rgba(180, 180, 180, .4);
     display: flex;
+    flex-direction: column;
     height: 80px;
     justify-content: center;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
     width: 100%;
+  }
+
+  .shortHeroDesc {
+    font-size: 1.3rem;
+    margin: 0;
   }
 
   .tab a.active {
@@ -148,6 +154,7 @@ main {
   #map {
     background-color: grey;
     min-height: 40vw;
+    position: relative;
     width: 70%;
   }
 
@@ -227,9 +234,10 @@ main {
 
   /* INFO STYLES */
   #help {
-    float: left;
-    left: 190px;
-    top: 50px;
+    /*float: left;*/
+    position: absolute;
+    left: -30px;
+    top: -20px;
   }
 }
 
@@ -270,10 +278,16 @@ main {
     align-items: center;
     background-color: rgba(180, 180, 180, .4);
     display: flex;
+    flex-direction: column;
     height: 50px;
     justify-content: center;
     margin-bottom: 20px;
     width: 100%;
+  }
+
+  .shortHeroDesc {
+    font-size: 0.6rem;
+    margin: 0;
   }
 
   #submitButton {
@@ -304,6 +318,7 @@ main {
   #map {
     background-color: grey;
     min-height: 44vw;
+    position: relative;
     width: 100%;
   }
 
@@ -409,16 +424,17 @@ main {
   }
 
   /* INFO STYLES */
-    #help {
-    float: left;
-    top: 150px;
+  #help {
+    position: absolute;
+    left: -25px;
+    top: -20px;
   }
 }
 
 @media (min-width: 1600px) {
   #help {
-    float: left;
-    left: 220px;
-    top: 50px;
+    position: absolute;
+    /*left: 200px;
+    top: 50px;*/
   }
 }
