@@ -31,6 +31,7 @@
 
   // MAKE INITIAL AJAX CALL //
   let currentDeals = [];
+  let pageDeals = [];
   const userPosition = {};
 
   const makeInitialCall = function(posInfo) {

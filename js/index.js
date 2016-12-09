@@ -82,7 +82,7 @@
     }, geoFailure);
   };
 
-  wrapLocation(makeInitialCall)
+  wrapLocation(makeInitialCall);
 
   // CREATE DEAL CARD FUNCTION //
   const createCard = function(deal) {
@@ -188,13 +188,13 @@
 
   // SEARCH BAR REQUEST //
   let queryLocationCoordinates;
+  let currentPageID = 'page1';
   const $search = $('#submitButton');
 
   $search.on('click', (event) => {
     event.preventDefault();
     $('#page1').parent().addClass('active');
     $(`#${currentPageID}`).parent().removeClass('active');
-
 
     const $userQuery = $('#userQuery').val();
 
@@ -291,7 +291,6 @@
   //     }
   //   });
   // };
-  let currentPageID = 'page1';
 
   $('.page').on('click', (event) => {
     const $target = $(event.target);
