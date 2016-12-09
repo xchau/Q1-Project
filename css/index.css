@@ -4,7 +4,7 @@ html {
 
 body {
   display: flex;
-  font-family: Josefin Sans, Roboto, sans-serif;
+  font-family: 'Josefin Sans', 'Open Sans', 'Roboto', sans-serif;
   flex-direction: column;
   min-height: 100vh;
 }
@@ -98,7 +98,7 @@ main {
   }
 
   .heroHeader {
-    height: 350px;
+    height: 25vw;
   }
 
   .heroSection {
@@ -411,5 +411,13 @@ main {
   #help {
     float: left;
     top: 150px;
+  }
+}
+
+@media (min-width: 1200px) {
+  #help {
+    float: left;
+    left: 220px;
+    top: 50px;
   }
 }

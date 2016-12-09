@@ -31,26 +31,26 @@
     return;
   }
 
-  // BROWSER GEOLOCATION //
-  // const userCoord = {};
-  //
-  // const geoSuccess = function(pos) {
-  //   userCoord.lat = pos.coords.latitude;
-  //   userCoord.lng = pos.coords.longitude;
-  // };
-  //
-  // const geoFailure = function(err) {
-  //   console.warn(`ERROR (${err.code}): ` + err.message);
-  // }
-  //
-  //
-  // const wrapLocation = function(cb) {
-  //
-  //   navigator.geolocation.getCurrentPosition((pos) => {
-  //     cb(pos)
-  //
-  //   }), geoFailure);
-  // });
+  BROWSER GEOLOCATION //
+  const userCoord = {};
+
+  const geoSuccess = function(pos) {
+    userCoord.lat = pos.coords.latitude;
+    userCoord.lng = pos.coords.longitude;
+  };
+
+  const geoFailure = function(err) {
+    console.warn(`ERROR (${err.code}): ` + err.message);
+  }
+
+  navigator.geolocation.getCurrentPosition(geoSuccess, geoFailure);
+
+  const wrapLocation = function(cb) {
+
+    navigator.geolocation.getCurrentPosition((pos) => {
+      cb(pos);
+    }), geoFailure);
+  });
 
   // CREATE DEAL CARD FUNCTION //
   const createCard = function(deal) {
@@ -187,7 +187,7 @@
     event.preventDefault();
 
     const $userQuery = $('#userQuery').val();
-    // const ajaxURL = ;
+
     const $xhrSearch = $.ajax({
       method: 'GET',
       url: `https://api.sqoot.com/v2/deals?api_key=9oll4i&category_slugs=dining-nightlife,activities-events,retail-services&per_page=12&radius=10&location=47.598962,-122.333799&query=${$userQuery}`,
@@ -199,15 +199,17 @@
         return;
       }
 
-      const userLocationCoordinates = [];
-
       currentDeals = [];
       locationNames = [];
 
+      const userLocationCoordinates = [];
+
       $('#deals').empty();
+
       for (const location of data.deals) {
         currentDeals.push(location.deal);
         locationNames.push(location.deal.merchant.name);
+
         const userCoord = {
           lat: location.deal.merchant.latitude,
           lng: location.deal.merchant.longitude
@@ -264,7 +266,7 @@
         createCard(location.deal);
       }
       generateMap(currentDeals, userLocationCoordinates);
-    })
+    });
   };
 
   let currentPageID = 'page1';

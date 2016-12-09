@@ -18,39 +18,71 @@
     $('.tooltipped').tooltip({delay: 50});
   });
 
-  let notVisited = JSON.parse(localStorage.getItem('notVisited')) || true;
-  // localStorage.removeItem('notVisited');
+  const notVisited = JSON.parse(localStorage.getItem('notVisited')) || true;
+  localStorage.removeItem('notVisited');
   // localStorage.setItem('notVisited', JSON.stringify(true));
 
   if (notVisited) {
     localStorage.setItem('notVisited', JSON.stringify(false));
-
-    $('#help').addClass('hideToast');
   }
   else {
     return;
   }
 
+
+  // MAKE INITIAL AJAX CALL //
+  let currentDeals = [];
+  const userPosition = {};
+
+  const makeInitialCall = function(posInfo) {
+    userPosition.lat = posInfo.coords.latitude;
+    userPosition.lng = posInfo.coords.longitude;
+
+    const $xhr = $.ajax({
+      method: 'GET',
+      url: `https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events,retail-services&per_page=12&radius=10&location=${userPosition.lat},${userPosition.lng}`,
+      dataType: 'json'
+    });
+
+    $xhr.done((data) => {
+      if ($xhr.status !== 200) {
+        return;
+      }
+
+      const locationCoordinates = [];
+
+      for (const location of data.deals) {
+        currentDeals.push(location.deal);
+        locationNames.push(location.deal.merchant.name);
+
+        const coord = {
+          lat: location.deal.merchant.latitude,
+          lng: location.deal.merchant.longitude
+        };
+
+        locationCoordinates.push(coord);
+        createCard(location.deal);
+      }
+      generateMap(currentDeals, locationCoordinates);
+    });
+
+    $xhr.fail((err) => {
+      console.error(err);
+    });
+  }
+
   // BROWSER GEOLOCATION //
-  // const userCoord = {};
-  //
-  // const geoSuccess = function(pos) {
-  //   userCoord.lat = pos.coords.latitude;
-  //   userCoord.lng = pos.coords.longitude;
-  // };
-  //
-  // const geoFailure = function(err) {
-  //   console.warn(`ERROR (${err.code}): ` + err.message);
-  // }
-  //
-  //
-  // const wrapLocation = function(cb) {
-  //
-  //   navigator.geolocation.getCurrentPosition((pos) => {
-  //     cb(pos)
-  //
-  //   }), geoFailure);
-  // });
+  const geoFailure = function(err) {
+    console.warn(`ERROR (${err.code}): ` + err.message);
+  }
+
+  const wrapLocation = function(cb) {
+    navigator.geolocation.getCurrentPosition((pos) => {
+      cb(pos);
+    }, geoFailure);
+  };
+
+  wrapLocation(makeInitialCall)
 
   // CREATE DEAL CARD FUNCTION //
   const createCard = function(deal) {
@@ -108,18 +140,11 @@
   let labelIndex;
   let namesIndex;
 
-  // GENERATE INITIAL GOOGLE MAP //
+  // POPULATE GOOGLE MAP //
   const generateMap = function(arrayOfDeals, arrayOfCoordinates) {
-    // console.log(arrayOfDeals);
-    // console.log(arrayOfCoordinates);
-    const current = {
-      lat: 47.598962,
-      lng: -122.333799
-    };
-
     const map = new google.maps.Map(document.getElementById('map'), {
       zoom: 12,
-      center: current
+      center: userPosition
     });
 
     labelIndex = 0;
@@ -143,42 +168,17 @@
         infowindow.open(map, marker);
       });
     }
+
+    const user = new google.maps.Marker({
+      position: userPosition,
+      icon: {
+        path: google.maps.SymbolPath.CIRCLE,
+        scale: 6
+      },
+      draggable: false,
+      map: map
+    });
   };
-
-  // MAKE INITIAL AJAX CALL //
-  let currentDeals = [];
-
-  const $xhr = $.ajax({
-    method: 'GET',
-    url: 'https://api.sqoot.com/v2/deals?api_key=9oll4i&category_slugs=dining-nightlife,activities-events,retail-services&per_page=12&radius=10&location=47.598962,-122.333799',
-    dataType: 'json'
-  });
-
-  $xhr.done((data) => {
-    if ($xhr.status !== 200) {
-      return;
-    }
-
-    const locationCoordinates = [];
-
-    for (const location of data.deals) {
-      currentDeals.push(location.deal);
-      locationNames.push(location.deal.merchant.name);
-
-      const coord = {
-        lat: location.deal.merchant.latitude,
-        lng: location.deal.merchant.longitude
-      };
-
-      locationCoordinates.push(coord);
-      createCard(location.deal);
-    }
-    generateMap(currentDeals, locationCoordinates);
-  });
-
-  $xhr.fail((err) => {
-    console.error(err);
-  });
 
   // SEARCH BAR REQUEST //
   const $search = $('#submitButton');
@@ -187,10 +187,10 @@
     event.preventDefault();
 
     const $userQuery = $('#userQuery').val();
-    // const ajaxURL = ;
+
     const $xhrSearch = $.ajax({
       method: 'GET',
-      url: `https://api.sqoot.com/v2/deals?api_key=9oll4i&category_slugs=dining-nightlife,activities-events,retail-services&per_page=12&radius=10&location=47.598962,-122.333799&query=${$userQuery}`,
+      url: `https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events,retail-services&per_page=12&radius=10&location=${userPosition.lat},${userPosition.lng}&query=${$userQuery}`,
       dataType: 'json'
     });
 
@@ -231,10 +231,10 @@
     let ajaxURL;
 
     if (userQuery) {
-      ajaxURL = `https://api.sqoot.com/v2/deals?api_key=9oll4i&category_slugs=dining-nightlife,activities-events,retail-services&per_page=12&page=${page}&radius=10&location=47.598962,-122.333799&query=${userQuery}`;
+      ajaxURL = `https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events,retail-services&per_page=12&page=${page}&radius=10&location=${userPosition.lat},${userPosition.lng}&query=${userQuery}`;
     }
     else {
-      ajaxURL = `https://api.sqoot.com/v2/deals?api_key=9oll4i&category_slugs=dining-nightlife,activities-events,retail-services&per_page=12&page=${page}&radius=10&location=47.598962,-122.333799`;
+      ajaxURL = `https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events,retail-services&per_page=12&page=${page}&radius=10&location=${userPosition.lat},${userPosition.lng}`;
     }
 
     const $xhrPage = $.ajax({
@@ -266,7 +266,7 @@
         createCard(location.deal);
       }
       generateMap(currentDeals, userLocationCoordinates);
-    })
+    });
   };
 
   let currentPageID = 'page1';
