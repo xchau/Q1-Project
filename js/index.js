@@ -26,7 +26,7 @@
     localStorage.setItem('notVisited', JSON.stringify(false));
   }
   else {
-    return;
+    $('#help').addClass('hideHelp');
   }
 
   // MAKE INITIAL AJAX CALL //
@@ -288,9 +288,9 @@
   //     }
   //   });
   // };
+  let currentPageID = 'page1';
 
   $('.page').on('click', (event) => {
-    let currentPageID = 'page1';
     const $target = $(event.target);
 
     $(`#${currentPageID}`).parent().removeClass('active');

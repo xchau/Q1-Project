@@ -1,10 +1,10 @@
-html {
-  font-size: 100%;
-}
-
 @font-face {
   font-family: 'Josefin Sans';
   src: url(fonts/Josefin_Sans) format('truetype');
+}
+
+html {
+  font-size: 100%;
 }
 
 body {
@@ -61,6 +61,10 @@ main {
 .modalContent p {
   margin-bottom: 0;
   line-height: 1.5;
+}
+
+.hideHelp {
+  display: none;
 }
 
 #moreDiv {
@@ -217,15 +221,11 @@ main {
 
   /* COLLAPSIBLE STYLES */
   .collapseLabel {
-    font-size: 2rem;
+    font-size: 1.6rem;
     margin: 0px;
   }
 
   /* INFO STYLES */
-  .hideToast {
-    display: none;
-  }
-
   #help {
     float: left;
     left: 190px;
@@ -393,7 +393,7 @@ main {
 
   /* COLLAPSIBLE STYLES */
   .collapseLabel {
-    font-size: 10px;
+    font-size: 0.4rem;
     margin: 0px;
     position: relative;;
     left: 10px;
@@ -409,11 +409,7 @@ main {
   }
 
   /* INFO STYLES */
-  .hideToast {
-    display: none;
-  }
-
-  #help {
+    #help {
     float: left;
     top: 150px;
   }
