@@ -18,6 +18,31 @@ main {
   flex: 1 0 auto;
 }
 
+i {
+  vertical-align: middle;
+}
+
+/* label focus color */
+label.active {
+ color: #f2f17a !important;
+}
+
+.flexRow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+}
+
+.smallContainer {
+  margin: 0px 25px;
+}
+
+.inputCol {
+  height: 20px;
+  margin: 0px !important;
+}
+
 .no-margin {
   margin: 0px;
 }
@@ -72,10 +97,20 @@ main {
   padding: 5px;
 }
 
+#submitButton {
+  font-size: 0.6rem;
+  float: right;
+  height: 40px;
+  padding: 3px;
+  top: 3px;
+  width: 100%;
+}
 
-#userQuery {
+#keyword, #location {
   background-color: white;
+  border-radius: 10px;
   box-shadow: 1px 1px 3px 1px #3c3a3b;
+  padding: 0px 5px 0px 8px;
 }
 
 
@@ -292,7 +327,8 @@ main {
   #submitButton {
     font-size: 0.6rem;
     padding: 0px 5px;
-    width: 80px;
+    height: 100px !important;
+    width: 80px !important;
   }
 
   .tab a.active {
