@@ -10,15 +10,16 @@
     $('.collapsible').collapsible();
   });
 
-  $(document).ready(function() {
+  $(document).ready(() => {
     $('.modal').modal();
   });
 
-  $(document).ready(function(){
-    $('.tooltipped').tooltip({delay: 50});
+  $(document).ready(() => {
+    $('.tooltipped').tooltip({ delay: 50 });
   });
 
   const notVisited = JSON.parse(localStorage.getItem('notVisited')) || true;
+
   // localStorage.removeItem('notVisited');
   // localStorage.setItem('notVisited', JSON.stringify(true));
 
@@ -39,7 +40,7 @@
 
     const $xhr = $.ajax({
       method: 'GET',
-      url: `https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events,retail-services&per_page=12&radius=20&location=${userPosition.lat},${userPosition.lng}`,
+      url: `https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events,retail-services&per_page=12&radius=20&location=98198`,
       dataType: 'json'
     });
 
@@ -91,11 +92,13 @@
 
     const $cardImgDiv = $('<div>').addClass('card-image waves-effect waves-block waves-light dealimage');
 
+    let $cardImg;
+
     if (!deal.image_url) {
-      const $cardImg = $('<img>').addClass('activator').prop('src', 'assets/404.jpg');
+      $cardImg = $('<img>').addClass('activator').prop('src', 'assets/404.jpg');
     }
     else {
-      const $cardImg = $('<img>').addClass('activator').prop('src', deal.image_url);
+      $cardImg = $('<img>').addClass('activator').prop('src', deal.image_url);
     }
 
     $cardImg.prop('onerror', 'this.src ="assets/404.jpg"');

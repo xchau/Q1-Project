@@ -6,14 +6,14 @@
 
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen"/>
-      <link type="text/css" rel="stylesheet" href="css/index.css">
+      <link type="text/css" rel="stylesheet" href="css/rewrite.css">
 
 
       <script defer src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       <script defer src="js/materialize.min.js"></script>
       <script async defer  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDe3s-A5dg6QWWI16Sd11C3_JtuoYavrys">
       </script>
-      <script defer src="js/index.js"></script>
+      <script defer src="js/rewrite.js"></script>
       <title>Miser</title>
     </head>
 
@@ -38,25 +38,33 @@
               </h3>
               <p class="shortHeroDesc red-text text-lighten-2">Search for bargains around your current location</p>
             </section>
-            <div class="container fullHeight">
-              <div class="row center">
-                <form class="container">
-                  <div class="input-field row">
-                    <input id="userQuery" type="search" placeholder="Enter a search term" class="col s12 m12" required>
-                    <label for="userQuery" class="buttonCol">
-                      <i class="material-icons yellow-text">search</i>
-                    </label>
-                    <!-- <input id="locationQuery" type="search" placeholder="Enter a search term" class="col s6" required>
-                    <label for="locationQuery" class="buttonCol">
-                      <i class="material-icons yellow-text">search</i>
-                    </label> -->
+            <!-- <div class="container fullHeight flexRow"> -->
+              <div class="row">
+                <form class="col s12">
+                  <div class="row flexRow smallContainer">
+                    <div class="input-field col s7 inputCol">
+                      <input id="keyword" type="tel" required>
+                      <label for="icon_telephone">
+                        <i class="material-icons yellow-text text-lighten-2">search</i>
+                        Enter a search term
+                      </label>
+                    </div>
+                    <div class="input-field col s3 inputCol">
+                      <input id="location" type="tel" required>
+                      <label for="icon_telephone">
+                        <i class="material-icons yellow-text">search</i>
+                        City / ZIP
+                      </label>
+                    </div>
+                    <div class="col s1 inputCol flexCenter">
+                      <button id="submitButton" class="btn waves-effect waves-light red lighten-2" type="submit" name="action">
+                        <i class="material-icons center-align">send</i>
+                      </button>
+                    </div>
                   </div>
-                  <button id="submitButton" class="btn waves-effect waves-light red lighten-2" type="submit" name="action">
-                    <i class="material-icons center-align">send</i>
-                  </button>
                 </form>
               </div>
-            </div>
+            <!-- </div> -->
           </div>
           <div class="col s8 offset-s2 center parallax">
             <img src="assets/coffee-shop.jpg" alt="coffee-shop">

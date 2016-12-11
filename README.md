@@ -1,3 +1,5 @@
+** drink,
+
 # What's the name of your project?
 
 This web app is named Miser because...
@@ -26,7 +28,11 @@ Miser provides local deals on dining entertainment and retail-services in two si
 
 
 # What was the most valuable piece of Customer feedback you received?
-What was the biggest challenge you had to overcome?
+- Will
+- Dan
+- Roommate
+
+# What was the biggest challenge you had to overcome?
 
 
 - save favorites
