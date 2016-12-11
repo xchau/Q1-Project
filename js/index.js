@@ -45,7 +45,9 @@
     currentMerchants = [];
 
     for (let i = 0; i < 12; i++) {
-      currentMerchants.push(allMerchants.shift());
+      if (allMerchants[i]) {
+        currentMerchants.push(allMerchants.shift());
+      }
     }
   };
 
@@ -111,8 +113,18 @@
     let url;
 
     if (!keyword && !location) {
-      url = 'https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events,retail-services&per_page=50&radius=20&location=seattle'
+      url = 'https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events,retail-services&per_page=50&radius=20&location=seattle';
     }
+    else if (!location) {
+      url = `https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events,retail-services&per_page=50&radius=20&location=seattle&query=${keyword}`;
+    }
+    else if (!keyword) {
+      url = `https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events,retail-services&per_page=50&radius=20&location=${location}`;
+    }
+    else {
+      url = `https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events,retail-services&per_page=50&radius=20&location=${location}&query=${keyword}`
+    }
+    console.log(url);
 
     const $xhr = $.ajax({
       method: 'GET',
