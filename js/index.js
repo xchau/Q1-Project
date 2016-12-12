@@ -19,19 +19,32 @@
   });
 
   // INITIAL HELP TOAST BASED ON LOCALSTORAGE VALUE //
-  const notVisited = JSON.parse(localStorage.getItem('notVisited')) || true;
+  const initialToast = function() {
+    if (document.cookie.indexOf('visited') >= 0) {
+      const toastMessage = 'Check out the map below to see the deals near you!';
 
-  localStorage.removeItem('notVisited');
-  localStorage.setItem('notVisited', JSON.stringify(true));
+      Materialize.toast(toastMessage, 6000);
+    }
+    else {
+      document.cookie = 'visited';
+    }
+  };
 
-  if (notVisited) {
-    localStorage.setItem('notVisited', JSON.stringify(false));
-  }
-  else {
-    const helpMessage = 'Check out the map below to see the deals near you!';
+  initialToast();
 
-    Materialize.toast(helpMessage, 6000);
-  }
+  // GET USER GEOLOCATION //
+  const userCoordinates = {};
+
+  const geoFailure = function(err) {
+    console.warn(`ERROR (${err.code}): ` + err.message);
+  };
+
+  const geoSuccess = function(pos) {
+    userCoordinates.lat = pos.coords.latitude;
+    userCoordinates.lng = pos.coords.longitude;
+  };
+
+  // navigator.geolocation.getCurrentPosition(geoSuccess, geoFailure);
 
   // DEFINE DATA STRUCTURES //
   // const userCoordinates = {};
@@ -48,6 +61,21 @@
       if (allMerchants[i]) {
         currentMerchants.push(allMerchants.shift());
       }
+    }
+  };
+
+  const renderMap = function(arrayOfDeals) {
+    const map = new google.map.Map(document.getElementById('map'), {
+      zoom: 11,
+      center: currentMerchants[0].coords
+    });
+
+    for (let i = 0; i < arrayOfDeals.length; i++) {
+      const contentString = '<div class="infoContainer">' + '<div><h2 class="infoTitle">' + arrayOfDeals[i].short_title + '</h2></div><div"><a href="' + arrayOfDeals[i].untracked_url + '" class="infoLink" target="_blank">Offered by ' + arrayOfDeals[i].provider_name + '<span><i class="material-icons infoIcon">add_shopping_cart</i></span></a>' + '<span>|</span><a href="' + arrayOfDeals[i].merchant.url + '" target="_blank">' + arrayOfDeals[i].merchant.name + '<span><i class="material-icons infoIcon">domain</i></span></a></div><div class="infoDescription">' + arrayOfDeals[i].description + '</div></div>';
+
+      const infowindow = new google.maps.InfoWindow({
+        content: contentString
+      });
     }
   };
 
@@ -124,7 +152,6 @@
     else {
       url = `https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events,retail-services&per_page=50&radius=20&location=${location}&query=${keyword}`
     }
-    console.log(url);
 
     const $xhr = $.ajax({
       method: 'GET',
@@ -133,44 +160,41 @@
     });
 
     $xhr.done((data) => {
-      // userCoordinates.lat = geoPos.coords.latitude;
-      // userCoordinates.lng = geoPos.coords.longitude;
-
       for (const object of data.deals) {
         allMerchants.push(object.deal);
       }
 
+      for (const merch of allMerchants) {
+        merch.coords = {
+          lat: merch.merchant.latitude,
+          lng: merch.merchant.longitude
+        };
+      }
+
       limitResults();
+      // console.log(userCoordinates);
+      // console.log(currentMerchants);
 
       for (const merchant of currentMerchants) {
         renderCard(merchant);
       }
-      console.log(keyword, location);
-      console.log(keyword == false);
-      console.log(!location && !keyword);
+      // console.log(keyword, location);
+    });
+
+    $xhr.fail((err) => {
+      console.error('Big Problem: ' + err);
     });
   };
 
-  // GET USER GEOLOCATION //
-  // const geoFailure = function(err) {
-  //   console.warn(`ERROR (${err.code}): ` + err.message);
-  // }
-  //
-  // const wrapGeo = function(callback) {
-  //   navigator.geolocation.getCurrentPosition((pos) => {
-  //     callback(pos);
-  //   }, geoFailure);
-  // }
-
   $('#submitButton').on('click', (event) => {
     event.preventDefault();
+    $('#deals').empty();
 
-    keywordQuery = $('#keyword').val();
-    locationQuery = $('#location').val();
+    keywordQuery = $('#keyword').val().replace(/( )/g, '+');
+    locationQuery = $('#location').val().replace(/( )/g, '+');
 
-    console.log(keywordQuery, locationQuery);
     ajaxCall(keywordQuery, locationQuery);
   });
 
-  // ajaxCall(keywordQuery, locationQuery);
+  ajaxCall(keywordQuery, locationQuery);
 })();
