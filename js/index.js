@@ -46,10 +46,9 @@
     userCoordinates.lng = pos.coords.longitude;
   };
 
-  navigator.geolocation.getCurrentPosition(geoSuccess, geoFailure);
+  // navigator.geolocation.getCurrentPosition(geoSuccess, geoFailure);
 
   // DEFINE DATA STRUCTURES //
-  const userCoordinates = {};
   let allMerchants;
   let keywordQuery;
   let locationQuery;
