@@ -48,7 +48,7 @@
 
   // DEFINE DATA STRUCTURES //
   // const userCoordinates = {};
-  const allMerchants = [];
+  let allMerchants;
   let keywordQuery;
   let locationQuery;
   let currentMerchants;
@@ -64,8 +64,10 @@
     }
   };
 
+  const mapLabels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
   const renderMap = function(arrayOfDeals) {
-    const map = new google.map.Map(document.getElementById('map'), {
+    const map = new google.maps.Map(document.getElementById('map'), {
       zoom: 11,
       center: currentMerchants[0].coords
     });
@@ -75,6 +77,17 @@
 
       const infowindow = new google.maps.InfoWindow({
         content: contentString
+      });
+
+      const marker = new google.maps.Marker({
+        position: arrayOfDeals[i].coords,
+        label: mapLabels[i],
+        title: arrayOfDeals[i].merchant.name,
+        map: map
+      });
+
+      marker.addListener('click', () => {
+        infowindow.open(map, marker);
       });
     }
   };
@@ -125,9 +138,20 @@
     $cardSpanTwo.appendTo($cardRevealDiv);
 
     const $pTwo = $('<p>').addClass('cardDescription');
+    const $linksDiv = $('<div>');
+    const $endLinkOne = $('<a>').addClass('infoLink').prop('target', '_blank');
+    const $pipe = $('<span>').text(' | ');
+    const $endLinkTwo = $('<a>').prop('target', '_blank');
 
     $pTwo.html(deal.description); // uses innerHTML!!
     $pTwo.appendTo($cardRevealDiv);
+
+    $endLinkOne.prop('href', deal.untracked_url);
+    $endLinkTwo.prop('href', deal.merchant.url);
+    $endLinkOne.text('Offered by ' + deal.provider_name).appendTo($linksDiv);
+    $pipe.appendTo($linksDiv);
+    $endLinkTwo.text(deal.merchant.name).appendTo($linksDiv);
+    $linksDiv.appendTo($cardRevealDiv);
 
     $cardImgDiv.appendTo($cardDiv);
     $cardContentDiv.appendTo($cardDiv);
@@ -141,16 +165,16 @@
     let url;
 
     if (!keyword && !location) {
-      url = 'https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events,retail-services&per_page=50&radius=20&location=seattle';
+      url = 'https://cors-anywhere.herokuapp.com/https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events,retail-services&per_page=50&radius=20&location=seattle';
     }
     else if (!location) {
-      url = `https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events,retail-services&per_page=50&radius=20&location=seattle&query=${keyword}`;
+      url = `https://cors-anywhere.herokuapp.com/https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events,retail-services&per_page=50&radius=20&location=seattle&query=${keyword}`;
     }
     else if (!keyword) {
-      url = `https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events,retail-services&per_page=50&radius=20&location=${location}`;
+      url = `https://cors-anywhere.herokuapp.com/https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events,retail-services&per_page=50&radius=20&location=${location}`;
     }
     else {
-      url = `https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events,retail-services&per_page=50&radius=20&location=${location}&query=${keyword}`
+      url = `https://cors-anywhere.herokuapp.com/https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events,retail-services&per_page=50&radius=20&location=${location}&query=${keyword}`
     }
 
     const $xhr = $.ajax({
@@ -160,6 +184,8 @@
     });
 
     $xhr.done((data) => {
+      allMerchants = [];
+
       for (const object of data.deals) {
         allMerchants.push(object.deal);
       }
@@ -172,6 +198,7 @@
       }
 
       limitResults();
+      renderMap(currentMerchants);
       // console.log(userCoordinates);
       // console.log(currentMerchants);
 
@@ -182,7 +209,7 @@
     });
 
     $xhr.fail((err) => {
-      console.error('Big Problem: ' + err);
+      console.error('Big Problem: ', err);
     });
   };
 
