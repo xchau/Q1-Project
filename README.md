@@ -5,6 +5,8 @@ This web app is named Miser, because its main purpose is to save the user money.
 
 ## What problem does it solve? Who has this problem? How does your project solve this problem?
 
+Demo video: https://youtu.be/orATF3f6CZQ
+
 My primary user (PU) is a person who is in an unfamiliar setting, on a business trip or otherwise. This PU wants to explore their surrounding but he/she'd rather not ask around -- that takes too much time and effort (and maybe PU is shy). Also PU may be limited by a budget or PU just likes saving money.
 
 Miser provides local deals on dining entertainment and retail-services in two simple layouts: map & info card. The idea is that they can quickly pull up this website, easily see what they need with minimal interaction with the site, buy the deal from the vendor and be on their way. If PU has an idea of what they want they can plug in a keyword ("pizza", "movie") into the search field & results should populate on submission. If PU does not have an idea, they can search with broader terms in the search

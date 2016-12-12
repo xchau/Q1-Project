@@ -38,7 +38,7 @@
   const userCoordinates = {};
 
   const geoFailure = function(err) {
-    console.warn(`ERROR (${err.code}): ` + err.message);
+    console.warn(`GEOLOCATION ERROR (${err.code}): ` + err.message);
   };
 
   const geoSuccess = function(pos) {
