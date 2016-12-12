@@ -20,10 +20,12 @@
 
   // INITIAL HELP TOAST BASED ON LOCALSTORAGE VALUE //
   const initialToast = function() {
-    if (document.cookie.indexOf('visited') >= 0) {
-      const toastMessage = 'Check out the map below to see the deals near you!';
+    if (document.cookie.indexOf('visited') !== 0) {
+      const howMessage = 'Enter a search term and/or location to get started';
+      const xtraMessage = 'Be sure to check out the map and deals tabs to view the deals near you!';
 
-      Materialize.toast(toastMessage, 6000);
+      Materialize.toast(howMessage, 6000);
+      setTimeout(Materialize.toast(xtraMessage, 6000), 3000);
     }
     else {
       document.cookie = 'visited';
@@ -62,6 +64,17 @@
         currentMerchants.push(allMerchants.shift());
       }
     }
+  };
+
+  const reportResults = function() {
+    if (allMerchants.length === 0) {
+      Materialize.toast('0 results found.', 2000);
+    }
+
+    const resultsTotal = allMerchants.length + currentMerchants.length;
+    const resultsMsg = `${resultsTotal} results found.`;
+
+    Materialize.toast(resultsMsg, 2000);
   };
 
   const mapLabels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -199,13 +212,10 @@
 
       limitResults();
       renderMap(currentMerchants);
-      // console.log(userCoordinates);
-      // console.log(currentMerchants);
 
       for (const merchant of currentMerchants) {
         renderCard(merchant);
       }
-      // console.log(keyword, location);
     });
 
     $xhr.fail((err) => {
@@ -215,12 +225,34 @@
 
   $('#submitButton').on('click', (event) => {
     event.preventDefault();
-    $('#deals').empty();
 
     keywordQuery = $('#keyword').val().replace(/( )/g, '+');
     locationQuery = $('#location').val().replace(/( )/g, '+');
 
+    if (!keywordQuery && !locationQuery) {
+      Materialize.toast('Don\'t forget your search parameters!', 3000);
+
+      return;
+    }
+
+    $('#deals').empty();
     ajaxCall(keywordQuery, locationQuery);
+    reportResults(allMerchants);
+  });
+
+  // ALLOWS USER TO LOAD MORE RESULTS //
+  const loadMore = function() {
+    $('#deals').empty();
+    limitResults();
+    renderMap(currentMerchants);
+
+    for (const merchant of currentMerchants) {
+      renderCard(merchant);
+    }
+  };
+
+  $('.moreButton').on('click', () => {
+    loadMore();
   });
 
   ajaxCall(keywordQuery, locationQuery);

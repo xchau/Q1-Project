@@ -34,10 +34,6 @@ label.active {
   height: 30px;
 }
 
-.smallContainer {
-  margin: 0px 25px;
-}
-
 .inputCol {
   height: 20px;
   margin: 0px !important;
@@ -142,7 +138,7 @@ label.active {
   }
 
   .heroHeader {
-    height: 27vw;
+    height: 24vw;
   }
 
   .heroSection {
@@ -173,6 +169,15 @@ label.active {
 
   .tabDiv {
     flex: 0 1 0;
+  }
+
+  .moreButton {
+    font-size: 35px;
+  }
+
+  .moreButton:hover {
+    color: #ed522f;
+    cursor: pointer;
   }
 
   /* MAP SECTION */
