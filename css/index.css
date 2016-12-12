@@ -465,19 +465,4 @@ label.active {
   .page-footer span, .page-footer a {
     font-size: 0.8rem;
   }
-
-  /* INFO STYLES */
-  #help {
-    position: absolute;
-    left: -25px;
-    top: -20px;
-  }
-}
-
-@media (min-width: 1600px) {
-  #help {
-    position: absolute;
-    /*left: 200px;
-    top: 50px;*/
-  }
 }
