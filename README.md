@@ -1,6 +1,6 @@
 ## What's the name of your project?
 
-This web app is named Miser because...
+This web app is named Miser, because its main purpose is to save the user money.
 
 
 ## What problem does it solve? Who has this problem? How does your project solve this problem?
@@ -20,18 +20,30 @@ Miser provides local deals on dining entertainment and retail-services in two si
 ## What technologies did it use?
 
 1. jQuery
-2. AJAX
+2. JavaScript + AJAX
 3. Materialize
-4. HTML/CSS/JavaScript
+4. HTML5
+5. CSS3
 
 
 ## What was the most valuable piece of Customer feedback you received?
-- Will
-- Dan
-- Roommate
+
+* Will: For users who are not familiar with the app already, provide them information via a description page. Also add a short description to the hero banner alongside the tagline.
+
+* Dan: Have the map display immediately upon page load. Since the main idea is to see deals quick and easy, this was a great suggestion.
+
+* Roommate: Tell the user how many (if any) results have been found.
+
 
 ## What was the biggest challenge you had to overcome?
 
+Initially I wanted results to be based on current user location. Learning how to use a higher-order function to pass the location coordinates to the AJAX call function was very difficult, even with Scott's help. In addition, making a simple pagination effect was extremely challenging. I did not (and still do not) know the proper way to code out an AJAX call for each click of a page number and have the screen reflect that specific page. Finally, it was hard to resist making small stylistic changes to my project in HTML/CSS while trying to focus on bigger issues.
 
-- save favorites
-- correct pagination fx
+
+## Future Improvements
+
+1. Allow the user to save favorite deals
+2. Add proper pagination
+3. Make the design mobile-responsive
+4. Re-position content that is unintuitive
+5. Allow user to 'ping' themselves and place a user location marker onto the map
