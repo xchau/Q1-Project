@@ -7,14 +7,14 @@ This web app is named Miser, because its main purpose is to save the user money.
 
 Demo video: https://youtu.be/orATF3f6CZQ
 
-My primary user (PU) is a person who is in an unfamiliar setting, on a business trip or otherwise. This PU wants to explore their surrounding but he/she'd rather not ask around -- that takes too much time and effort (and maybe PU is shy). Also PU may be limited by a budget or PU just likes saving money.
+The intended primary user (PU) is a person who is in an unfamiliar setting, on a business trip or otherwise. This PU wants to explore the city in which he/she is in but he/she would rather not ask around. Perhaps PU is constrained by time or he/she is shy. In any case, PU wants to save as much money as possible in experiencing what the city has to offer.
 
-Miser provides local deals on dining entertainment and retail-services in two simple layouts: map & info card. The idea is that they can quickly pull up this website, easily see what they need with minimal interaction with the site, buy the deal from the vendor and be on their way. If PU has an idea of what they want they can plug in a keyword ("pizza", "movie") into the search field & results should populate on submission. If PU does not have an idea, they can search with broader terms in the search
+Miser provides local deals on dining and entertainment in two simple layouts: map view & info card view. The idea is that PU can quickly pull up this website, easily see what they need with minimal mouse clicks, buy the deal from the vendor and be on their way. If PU has an idea of what they want they can enter a keyword ("pizza", "movie") into the search fields (one or the other), and results should populate in each respective view layout. If PU does not have an idea of what they are looking for, they can search with broader terms in the search fields.
 
 
 ## What web APIs did it use?
 
-1. Sqoot: an API that that stores information on 250,000 different merchants. In particular I used Sqoot to get "deals" and "coupon" information about local merchants via an AJAX call that queried user location, a search radius, results per page, category of service/deal and a potential user keyword query.
+1. Sqoot: an API that that stores information on 250,000 different merchants. I used Sqoot to obtain "deals" and "coupon" information about merchants within the US via an AJAX call that queried a search radius, the number of results per page, the category of the service or deal, an optional user location query, and an optional user keyword query.
 
 2. Google Maps API: a map API from Google that allowed me to: 1) generate a map object onto the screen, centered on the user location, 2) plot markers at merchant locations, 2a) create custom labels for each marker to display the merchant name, 2b) create custom info window for each marker similar to deal card, 3) display the user location, 4) re-populate map contents with whatever's on the deals page.
 
