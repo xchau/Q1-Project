@@ -20,7 +20,7 @@
 
   // INITIAL HELP TOAST BASED ON LOCALSTORAGE VALUE //
   const initialToast = function() {
-    if (document.cookie.indexOf('visited') !== 0) {
+    if (document.cookie.indexOf('visited') >= 0) {
       const howMessage = 'Enter a search term and/or location to get started';
       const xtraMessage = 'Be sure to check out the map and deals tabs to view the deals near you!';
 
@@ -70,11 +70,12 @@
     if (allMerchants.length === 0) {
       Materialize.toast('0 results found.', 2000);
     }
+    else {
+      const resultsTotal = allMerchants.length;
+      const resultsMsg = `${resultsTotal} results found.`;
 
-    const resultsTotal = allMerchants.length + currentMerchants.length;
-    const resultsMsg = `${resultsTotal} results found.`;
-
-    Materialize.toast(resultsMsg, 2000);
+      Materialize.toast(resultsMsg, 2000);
+    }
   };
 
   const mapLabels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -174,20 +175,20 @@
   };
 
   // DEFINE AJAX CALL FUNCTION //
-  const ajaxCall = function(keyword, location) {
+  const ajaxCall = function(keyword, location, reportCB) {
     let url;
 
     if (!keyword && !location) {
-      url = 'https://cors-anywhere.herokuapp.com/https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events,retail-services&per_page=50&radius=20&location=seattle';
+      url = 'https://cors-anywhere.herokuapp.com/https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events&per_page=50&radius=20&location=seattle';
     }
     else if (!location) {
-      url = `https://cors-anywhere.herokuapp.com/https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events,retail-services&per_page=50&radius=20&location=seattle&query=${keyword}`;
+      url = `https://cors-anywhere.herokuapp.com/https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events&per_page=50&radius=20&location=seattle&query=${keyword}`;
     }
     else if (!keyword) {
-      url = `https://cors-anywhere.herokuapp.com/https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events,retail-services&per_page=50&radius=20&location=${location}`;
+      url = `https://cors-anywhere.herokuapp.com/https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events&per_page=50&radius=20&location=${location}`;
     }
     else {
-      url = `https://cors-anywhere.herokuapp.com/https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events,retail-services&per_page=50&radius=20&location=${location}&query=${keyword}`
+      url = `https://cors-anywhere.herokuapp.com/https://api.sqoot.com/v2/deals?api_key=s3btbi&category_slugs=dining-nightlife,activities-events&per_page=50&radius=20&location=${location}&query=${keyword}`;
     }
 
     const $xhr = $.ajax({
@@ -208,6 +209,10 @@
           lat: merch.merchant.latitude,
           lng: merch.merchant.longitude
         };
+      }
+
+      if (reportCB) {
+        reportCB();
       }
 
       limitResults();
@@ -236,8 +241,7 @@
     }
 
     $('#deals').empty();
-    ajaxCall(keywordQuery, locationQuery);
-    reportResults(allMerchants);
+    ajaxCall(keywordQuery, locationQuery, reportResults);
   });
 
   // ALLOWS USER TO LOAD MORE RESULTS //
