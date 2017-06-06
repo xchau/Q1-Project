@@ -2,9 +2,7 @@
 
 Miser is a web app designed to save its users money. Whether you're in an unfamiliar area or sitting in your living room wondering if you can grab a delicious burger or join a city tour on the cheap, Miser has you covered.
 
-*Demo video: https://youtu.be/orATF3f6CZQ*
 ![DEMO VIDEO](https://youtu.be/orATF3f6CZQ)
-
 
 ## Primary Use Case
 
